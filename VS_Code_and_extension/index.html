@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://iceinke.github.io/img/post12.jpg">
 <meta property="article:published_time" content="2024-10-15T12:41:07.032Z">
-<meta property="article:modified_time" content="2025-01-05T06:07:37.281Z">
+<meta property="article:modified_time" content="2025-04-16T16:18:01.907Z">
 <meta property="article:author" content="Feng Zhu">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年1月5日
+                    本文最后更新于 2025年4月17日
                   
                 
               </p>
@@ -246,7 +246,7 @@
 <ul>
 <li><p>下载MobaXterm，<br><a target="_blank" rel="noopener" href="https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip">https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip</a><br>点击上面的链接，即可下载，按照提示进行安装</p>
 </li>
-<li><p>登录nnu集群<br>双击进入MobaXterm程序，点击star local terminal，你可以试试ssh -XY <a href="mailto:&#x7a;&#104;&#x75;&#102;&#x65;&#x6e;&#x67;&#64;&#50;&#50;&#50;&#46;&#x31;&#57;&#x32;&#x2e;&#55;&#x2e;&#x35;&#49;">&#x7a;&#104;&#x75;&#102;&#x65;&#x6e;&#x67;&#64;&#50;&#50;&#50;&#46;&#x31;&#57;&#x32;&#x2e;&#55;&#x2e;&#x35;&#49;</a>能不能直接登录，按理来说也许能登上去，如果登不上去，可以通过修改.ssh&#x2F;config 。</p>
+<li><p>登录nnu集群<br>双击进入MobaXterm程序，点击star local terminal，你可以试试ssh -XY <a href="mailto:&#x7a;&#104;&#117;&#x66;&#101;&#x6e;&#103;&#64;&#50;&#50;&#50;&#x2e;&#x31;&#x39;&#x32;&#46;&#55;&#x2e;&#x35;&#49;">&#x7a;&#104;&#117;&#x66;&#101;&#x6e;&#103;&#64;&#50;&#50;&#50;&#x2e;&#x31;&#x39;&#x32;&#46;&#55;&#x2e;&#x35;&#49;</a>能不能直接登录，按理来说也许能登上去，如果登不上去，可以通过修改.ssh&#x2F;config 。</p>
 </li>
 <li><p>修改ssh配置文件<br>你可能会发现当前路径下没有.ssh&#x2F;这个文件夹，你可以用下面的命令创建一个<br>mkdir .ssh<br>vi .ssh&#x2F;config    创建并修改config文件，输入下面几行</p>
 </li>
@@ -255,7 +255,7 @@
 
 
 <ul>
-<li>再次ssh -XY <a href="mailto:&#x7a;&#104;&#x75;&#x66;&#101;&#x6e;&#103;&#64;&#50;&#x32;&#50;&#46;&#49;&#57;&#x32;&#46;&#x37;&#x2e;&#x35;&#x31;">&#x7a;&#104;&#x75;&#x66;&#101;&#x6e;&#103;&#64;&#50;&#x32;&#50;&#46;&#49;&#57;&#x32;&#46;&#x37;&#x2e;&#x35;&#x31;</a> 登录应该就能看到你的文件了，进行课上测试使用 graph-&gt;Draw() 时就能看到图啦！（这个应用甚至在下次能不用你输入密码自动登录）</li>
+<li>再次ssh -XY <a href="mailto:&#122;&#104;&#117;&#102;&#101;&#x6e;&#103;&#64;&#50;&#50;&#50;&#46;&#x31;&#57;&#50;&#46;&#55;&#46;&#x35;&#49;">&#122;&#104;&#117;&#102;&#101;&#x6e;&#103;&#64;&#50;&#50;&#50;&#46;&#x31;&#57;&#50;&#46;&#55;&#46;&#x35;&#49;</a> 登录应该就能看到你的文件了，进行课上测试使用 graph-&gt;Draw() 时就能看到图啦！（这个应用甚至在下次能不用你输入密码自动登录）</li>
 </ul>
 <h2 id="X-server-for-Mac"><a href="#X-server-for-Mac" class="headerlink" title="X-server for Mac"></a>X-server for Mac</h2><p>首先下载xquartz，mac用这个链接<a target="_blank" rel="noopener" href="https://www.xquartz.org/releases/XQuartz-2.8.5.html">https://www.xquartz.org/releases/XQuartz-2.8.5.html</a> 下载并安装，打开xquartz应用，在自己的终端上用这个命令，你可以把这个命令放在<code>.bashrc</code>中而不用每次都需要使用这个命令<br><code>export DISPLAY=:0</code><br>之后用这个命令登录集群就能看图了（-XY 就是启用x服务器转发）<br><code>ssh -XY uername@server</code></p>
 <h2 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h2><p>下载<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a>，打开之后请调至dark模式，because light attracts bugs.<br>如果你英文苦手，请在扩展中搜索简体中文，安装重启之后就能显示中文了。当你使用特定的编程语言的时候，右下角会弹出窗口让你安装对应的插件，以方便你的阅读，当然你也可以直接搜索，比如C++去获取插件。</p>
@@ -275,6 +275,8 @@
 
 <p><a target="_blank" rel="noopener" href="https://authentication.fnal.gov/krb5conf/">下载OSX</a>并复制到&#x2F;etc&#x2F;krb5.conf<br>这一步复制需要sudo命令，输入root密码之后才能复制到&#x2F;etc中<br>要先在本地<code>kinit username@FNAL.GOV</code>之后，再在vscode里面登录lpc就可以了</p>
 <h3 id="可能导致连接失败的原因及解决方法："><a href="#可能导致连接失败的原因及解决方法：" class="headerlink" title="可能导致连接失败的原因及解决方法："></a>可能导致连接失败的原因及解决方法：</h3><ul>
+<li>1.99版本更新后会导致ssh连接出现问题（从搜索的<a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/204264">资料</a>来看是老问题），手动回退到<a target="_blank" rel="noopener" href="https://vscode.dev.org.tw/updates/v1_98">上个版本</a>就好了</li>
+<li><img src="/postfigure/VS_Code_and_extension/image-20250417001356380.png" srcset="/img/loading.gif" lazyload alt="image-20250417001356380" style="zoom:33%;" /></li>
 <li>第一次连接的时候会在服务器的home文件夹下下载一个server，所以你需要保证你的home文件夹下有足够的空间</li>
 </ul>
 <p><img src="/postfigure/VS_Code_and_extension/image-20241015215432720.png" srcset="/img/loading.gif" lazyload alt="vscode-server"></p>
@@ -309,6 +311,9 @@
 <p>注：经过某次更新之后Copilot在本地的时候不能正常运行，但在集群中依旧能使用，因为众所周知的原因你需要设置代理服务器。<br>在vscode中按<kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>搜索<code>open user settings json</code>在花括号内添加<code>&quot;http.proxy&quot;: &quot;http://127.0.0.1:7890&quot;,&quot;https.proxy&quot;: &quot;http://127.0.0.1:7890&quot;,</code>（注意逗号，这个地址和端口号会因为你的VPN不同而不同，如果没成功的话，你可能需要搜索一下解决办法）。这样设置后，本地在打开VPN之后就能使用Copilot了！但是这样登录集群之后会发现Copilot又不能使用了，因为这样设置会导致你集群也会走这个代理服务器，很显然集群是不会连通这个地址的。</p>
 <p>你需要类似的在连接到集群之后在vscode中按<kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>搜索<code>open remote settings json</code>在花括号内添加<code>&quot;http.proxy&quot;: &quot;&quot;, &quot;https.proxy&quot;: &quot;&quot;</code>意味着不去用代理服务器，这样就能保证本地和服务器都能使用啦！</p>
 <p>注2:在不明原因的影响下，lpc集群的copilot chat无法登陆，是因为lpc证书会在家目录生成一个证书文件，copilot会读取这个证书并尝试使用他，这显然不是属于他的证书，所以你需要在remote settings json配置中添加<code>&quot;http.proxyStrictSSL&quot;: false, &quot;http.systemCertificates&quot;: false,</code>来忽略这个证书文件</p>
+<hr>
+<h1 id="在VScode中使用overleaf"><a href="#在VScode中使用overleaf" class="headerlink" title="在VScode中使用overleaf"></a>在VScode中使用overleaf</h1><p><img src="/postfigure/VS_Code_and_extension/image-20250417000826131.png" srcset="/img/loading.gif" lazyload alt="image-20250417000826131"></p>
+<p>下载这个插件，按照里面的说明<a target="_blank" rel="noopener" href="https://github.com/iamhyc/Overleaf-Workshop/wiki">GitHub Wiki</a>，获取overleaf的cookie登陆就好了。在VScode里面使用的好处是能使用copilot辅助。</p>
 <hr>
 <h1 id="Zotero群组文件共享-（施工中。。。）"><a href="#Zotero群组文件共享-（施工中。。。）" class="headerlink" title="Zotero群组文件共享 （施工中。。。）"></a>Zotero群组文件共享 （施工中。。。）</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43210428/article/details/121203670">Zotero | 群组Group功能的建立，加入及管理使用（十）_zotero新建群组-CSDN博客</a></p>
 <p><a target="_blank" rel="noopener" href="https://zotero-chinese.com/user-guide/sync">数据与文件的同步 | Zotero 中文社区 (zotero-chinese.com)</a></p>
