@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Z001.ico">
+  <link rel="icon" href="/img/Z001.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Feng Zhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这篇笔记是介绍Visual Studio Code的用法和插件的使用，特别是ssh插件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS Code and Extension">
+<meta property="og:url" content="http://iceinke.github.io/VS_Code_and_extension/index.html">
+<meta property="og:site_name" content="Feng Zhu&#39;s Blog">
+<meta property="og:description" content="这篇笔记是介绍Visual Studio Code的用法和插件的使用，特别是ssh插件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://iceinke.github.io/img/post12.jpg">
+<meta property="article:published_time" content="2024-10-15T12:41:07.032Z">
+<meta property="article:modified_time" content="2025-07-17T06:40:45.100Z">
+<meta property="article:author" content="Feng Zhu">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://iceinke.github.io/img/post12.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>VS Code and Extension - Feng Zhu&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"iceinke.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":250,"cursorChar":" ","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 30vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Feng</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post3.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">VS Code and Extension</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">VS Code and Extension</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年7月17日
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <link rel="stylesheet" href="/css/downloadbutton.css">
+
+<p><a href="/download/VS_Code_and_extension.pdf" class="download-button">下载文章</a></p>
+<h2 id="MobaXterm"><a href="#MobaXterm" class="headerlink" title="MobaXterm"></a>MobaXterm</h2><p>如果你使用的是window系统，自带的cmd终端可能不支持图像传输和显示，你需要下面这个软件或者使用vscode</p>
+<p>MobaXterm程序，这个结合了ssh和x server，是个很方便的应用（甚至有图形化的界面），功能很强大，现只说明如何显示出集群上的图</p>
+<ul>
+<li><p>下载MobaXterm，<br><a target="_blank" rel="noopener" href="https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip">https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip</a><br>点击上面的链接，即可下载，按照提示进行安装</p>
+</li>
+<li><p>登录nnu集群<br>双击进入MobaXterm程序，点击star local terminal，你可以试试ssh -XY <a href="mailto:&#122;&#104;&#x75;&#102;&#101;&#110;&#103;&#x40;&#x32;&#50;&#x32;&#46;&#x31;&#x39;&#50;&#46;&#55;&#46;&#x35;&#x31;">&#122;&#104;&#x75;&#102;&#101;&#110;&#103;&#x40;&#x32;&#50;&#x32;&#46;&#x31;&#x39;&#50;&#46;&#55;&#46;&#x35;&#x31;</a>能不能直接登录，按理来说也许能登上去，如果登不上去，可以通过修改.ssh&#x2F;config 。</p>
+</li>
+<li><p>修改ssh配置文件<br>你可能会发现当前路径下没有.ssh&#x2F;这个文件夹，你可以用下面的命令创建一个<br>mkdir .ssh<br>vi .ssh&#x2F;config    创建并修改config文件，输入下面几行</p>
+</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">Host</span> <span class="hljs-number">222.192.7.51</span><br>HostKeyAlgorithms +ssh-rsa<br>ForwardX11 <span class="hljs-literal">yes</span><br>ForwardX11Trusted <span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>再次ssh -XY <a href="mailto:&#x7a;&#104;&#x75;&#x66;&#x65;&#110;&#103;&#x40;&#50;&#50;&#50;&#46;&#x31;&#57;&#50;&#x2e;&#55;&#x2e;&#53;&#x31;">&#x7a;&#104;&#x75;&#x66;&#x65;&#110;&#103;&#x40;&#50;&#50;&#50;&#46;&#x31;&#57;&#50;&#x2e;&#55;&#x2e;&#53;&#x31;</a> 登录应该就能看到你的文件了，进行课上测试使用 graph-&gt;Draw() 时就能看到图啦！（这个应用甚至在下次能不用你输入密码自动登录）</li>
+</ul>
+<h2 id="X-server-for-Mac"><a href="#X-server-for-Mac" class="headerlink" title="X-server for Mac"></a>X-server for Mac</h2><p>首先下载xquartz，mac用这个链接<a target="_blank" rel="noopener" href="https://www.xquartz.org/releases/XQuartz-2.8.5.html">https://www.xquartz.org/releases/XQuartz-2.8.5.html</a> 下载并安装，打开xquartz应用，在自己的终端上用这个命令，你可以把这个命令放在<code>.bashrc</code>中而不用每次都需要使用这个命令<br><code>export DISPLAY=:0</code><br>之后用这个命令登录集群就能看图了（-XY 就是启用x服务器转发）<br><code>ssh -XY uername@server</code></p>
+<h2 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h2><p>下载<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a>，打开之后请调至dark模式，because light attracts bugs.<br>如果你英文苦手，请在扩展中搜索简体中文，安装重启之后就能显示中文了。当你使用特定的编程语言的时候，右下角会弹出窗口让你安装对应的插件，以方便你的阅读，当然你也可以直接搜索，比如C++去获取插件。</p>
+<p><img src="/postfigure/VS_Code_and_extension/image-20241016112701291.png" srcset="/img/loading.gif" lazyload alt="让我们说中文！"><img src="/postfigure/VS_Code_and_extension/image-20241016113449411.png" srcset="/img/loading.gif" lazyload alt="其他推荐的插件" style="zoom:150%;" /></p>
+<h2 id="在vscode编辑latex"><a href="#在vscode编辑latex" class="headerlink" title="在vscode编辑latex"></a>在vscode编辑latex</h2><p><code>brew install mactex --cask</code> <a target="_blank" rel="noopener" href="https://brew.sh/">brew</a>下载mactex<br>打开vscode ，下载插件<br> <img src="/postfigure/VS_Code_and_extension/image-20241015220806138.png" srcset="/img/loading.gif" lazyload alt="LaTeX"><br>参考专栏：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/654720622">https://zhuanlan.zhihu.com/p/654720622</a><br>如果要编译中文需要在开头加UTF8，下面是个例子</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\documentclass</span>&#123;article&#125;<br><span class="hljs-keyword">\usepackage</span>[UTF8]&#123;ctex&#125;<br><span class="hljs-keyword">\begin</span>&#123;document&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="在vscode登录lpc，lxplus等"><a href="#在vscode登录lpc，lxplus等" class="headerlink" title="在vscode登录lpc，lxplus等"></a>在vscode登录lpc，lxplus等</h2><p>下载这三个插件</p>
+<p><img src="/postfigure/VS_Code_and_extension/image-20241015221344343.png" srcset="/img/loading.gif" lazyload alt="image-20241015221344343"></p>
+<p>具体用法看Remote-SSH里面的说明（十分简单易操作)，登录步骤如下</p>
+<p><img src="/postfigure/VS_Code_and_extension/image-20241015214909354.png" srcset="/img/loading.gif" lazyload alt="登录步骤"></p>
+<p>Tips: 如果你想登录lpc账号请参考这个设置一下.ssh&#x2F;config的配置：<a target="_blank" rel="noopener" href="https://uscms.org/uscms_at_work/physics/computing/getstarted/uaf.shtml">https://uscms.org/uscms_at_work/physics/computing/getstarted/uaf.shtml</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">cd</span> <br>$ <span class="hljs-built_in">ls</span> -a <span class="hljs-comment">#如果你找到了.ssh文件夹就不用重新创建了</span><br>$ <span class="hljs-built_in">mkdir</span> .ssh<br>$ vi .ssh/config<br></code></pre></td></tr></table></figure>
+
+<p>在<code>.ssh/config</code>中添加下面的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">Host cmslpc*.fnal.gov<br>    GSSAPIAuthentication <span class="hljs-built_in">yes</span><br>    GSSAPIDelegateCredentials <span class="hljs-built_in">yes</span><br>    StrictHostKeyChecking no<br>    UserKnownHostsFile /dev/null<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://authentication.fnal.gov/krb5conf/">下载OSX</a>并复制到&#x2F;etc&#x2F;krb5.conf<br>这一步复制需要sudo命令，输入root密码之后才能复制到&#x2F;etc中<br>要先在本地<code>kinit username@FNAL.GOV</code>之后，再在vscode里面登录lpc就可以了</p>
+<h3 id="可能导致连接失败的原因及解决方法："><a href="#可能导致连接失败的原因及解决方法：" class="headerlink" title="可能导致连接失败的原因及解决方法："></a>可能导致连接失败的原因及解决方法：</h3><ul>
+<li>1.99版本更新后会导致ssh连接出现问题（从搜索的<a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/204264">资料</a>来看是老问题），手动回退到<a target="_blank" rel="noopener" href="https://code.visualstudio.com/updates/v1_98">上个版本</a>就好了</li>
+<li><img src="/postfigure/VS_Code_and_extension/image-20250417001356380.png" srcset="/img/loading.gif" lazyload alt="image-20250417001356380" style="zoom:33%;" /></li>
+<li>第一次连接的时候会在服务器的home文件夹下下载一个server，所以你需要保证你的home文件夹下有足够的空间</li>
+</ul>
+<p><img src="/postfigure/VS_Code_and_extension/image-20241015215432720.png" srcset="/img/loading.gif" lazyload alt="vscode-server"></p>
+<ul>
+<li><p>连接lpc服务器的时候时常会出现问题，主要有以下几种解决方法：</p>
+<ul>
+<li>检查是否<code>kinit username@FNAL.GOV</code>，最好的方法是在终端中先登录到lpc上之后再用vscode登录</li>
+<li>删除<code>.ssh/config</code>中  <code>Host cmslpc-el9.fnal.gov</code>相关的几行，重新在Remote - SSH插件中新建远程(别把之前添加的<code>Host cmslpc*.fnal.gov</code>相关的删掉了)</li>
+<li>检查你的网络和风水</li>
+</ul>
+</li>
+<li><p>重启和重试能解决90%的问题，<code>rm -rf .vscode-server</code>解决100%的问题！</p>
+</li>
+</ul>
+<h2 id="在vscode里编译roofit程序"><a href="#在vscode里编译roofit程序" class="headerlink" title="在vscode里编译roofit程序"></a>在vscode里编译roofit程序</h2><p><code>which root</code>找到root的安装路径，用-l找到链接的路径，一般找到include文件夹就是有包含root所需的头文件了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">% <span class="hljs-built_in">which</span> root<br>/opt/homebrew/bin/root<br>% <span class="hljs-built_in">ls</span> -l /opt/homebrew/bin/root<br>/opt/homebrew/bin/root -&gt; ../Cellar/root/6.28.06/bin/root<br>% <span class="hljs-built_in">ls</span> /opt/homebrew/Cellar/root/6.28.06/include/root <br></code></pre></td></tr></table></figure>
+
+<p>打开你的vscode里面一个工作文件夹下，有一个.vscode&#x2F;c_cpp_properties.json的隐藏文件夹中的配置文件，将你的root路径放进去即可，注意上一行的逗号别忘记加</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;includePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;/**&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-string">&quot;/opt/homebrew/Cellar/root/6.28.06/include/root&quot;</span><br>            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="GitHub-Copilot-的免费申请及使用"><a href="#GitHub-Copilot-的免费申请及使用" class="headerlink" title="GitHub Copilot 的免费申请及使用"></a>GitHub Copilot 的免费申请及使用</h2><p>参考这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/wang1664178416/article/details/138257641">链接</a>进行教育优惠申请，如果你登录上GitHub遇到困难，请申请<a target="_blank" rel="noopener" href="https://ikuuu.pw/auth/register?code=ghdW">VPN</a>。</p>
+<blockquote>
+<p>在中国做研究没有VPN还能做什么研究 </p>
+</blockquote>
+<p>当你被批准之后等待几天之后会给你发个邮件，你会发现批准按钮变紫了之后就能去申请Copilot了！</p>
+<p><img src="/postfigure/VS_Code_and_extension/image-20241015222216265.png" srcset="/img/loading.gif" lazyload alt="提交请求" style="zoom:67%;" /><img src="/postfigure/VS_Code_and_extension/image-20241015222504665.png" srcset="/img/loading.gif" lazyload alt="获得批准" style="zoom: 67%;" /><img src="/postfigure/VS_Code_and_extension/image-20241015221540461.png" srcset="/img/loading.gif" lazyload alt="安装插件"></p>
+<p>你可以在ssh服务器中安装插件，这样你在远程作业的时候也能使用Copilot啦！</p>
+<p>Copilot主要有两个功能，你可以像使用ChatGPT一样问这只青蛙（？）任何代码的问题，他还会根据你目前打开的窗口（或者你将文件拖给他）去提出建议；他另外一个强大的功能是根据上下文去猜想你想输入的代码，你只需要按下<code>Tab</code>键就能应用他的建议，或者你使用<code>command + i</code>去让他生成大段代码！</p>
+<p><img src="/postfigure/VS_Code_and_extension/image-20241015223150712.png" srcset="/img/loading.gif" lazyload alt="like ChatGPT"><img src="/postfigure/VS_Code_and_extension/image-20241015223418714.png" srcset="/img/loading.gif" lazyload alt="代码填充"></p>
+<p>注：经过某次更新之后Copilot在本地的时候不能正常运行，但在集群中依旧能使用，因为众所周知的原因你需要设置代理服务器。<br>在vscode中按<kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>搜索<code>open user settings json</code>在花括号内添加<code>&quot;http.proxy&quot;: &quot;http://127.0.0.1:7890&quot;,&quot;https.proxy&quot;: &quot;http://127.0.0.1:7890&quot;,</code>（注意逗号，这个地址和端口号会因为你的VPN不同而不同，如果没成功的话，你可能需要搜索一下解决办法）。这样设置后，本地在打开VPN之后就能使用Copilot了！但是这样登录集群之后会发现Copilot又不能使用了，因为这样设置会导致你集群也会走这个代理服务器，很显然集群是不会连通这个地址的。</p>
+<p>你需要类似的在连接到集群之后在vscode中按<kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>搜索<code>open remote settings json</code>在花括号内添加<code>&quot;http.proxy&quot;: &quot;&quot;, &quot;https.proxy&quot;: &quot;&quot;</code>意味着不去用代理服务器，这样就能保证本地和服务器都能使用啦！</p>
+<p>注2:在不明原因的影响下，lpc集群的copilot chat无法登陆，是因为lpc证书会在家目录生成一个证书文件，copilot会读取这个证书并尝试使用他，这显然不是属于他的证书，所以你需要在remote settings json配置中添加<code>&quot;http.proxyStrictSSL&quot;: false, &quot;http.systemCertificates&quot;: false,</code>来忽略这个证书文件</p>
+<p>注3: 在不明原因的影响下，lpc集群无法使用chat，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32057921/article/details/145764603#comments_36757995">参考</a>这篇文章设置<br>在Vscode的settings中搜索Extension Kind，找到对应位置并添加</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;remote.extensionKind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;GitHub.copilot&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;ui&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>        <br>  <span class="hljs-attr">&quot;GitHub.copilot-chat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;ui&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>   <br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>注4: SignatureVerificationInternal: Signature verification failed with ‘UnknownError’ error.<a target="_blank" rel="noopener" href="https://blog.csdn.net/gaogzhen/article/details/129478770">参考</a></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;extensions.verifySignature&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<hr>
+<h1 id="在VScode中使用overleaf"><a href="#在VScode中使用overleaf" class="headerlink" title="在VScode中使用overleaf"></a>在VScode中使用overleaf</h1><p><img src="/postfigure/VS_Code_and_extension/image-20250417000826131.png" srcset="/img/loading.gif" lazyload alt="image-20250417000826131"></p>
+<p>下载这个插件，按照里面的说明<a target="_blank" rel="noopener" href="https://github.com/iamhyc/Overleaf-Workshop/wiki">GitHub Wiki</a>，获取overleaf的cookie登陆就好了。在VScode里面使用的好处是能使用copilot辅助。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43210428/article/details/121203670">Zotero | 群组Group功能的建立，加入及管理使用（十）_zotero新建群组-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zotero-chinese.com/user-guide/sync">数据与文件的同步 | Zotero 中文社区 (zotero-chinese.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649485162">【工程笔记】搭建Zotero同步服务器 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8f773560115e">Zotero使用WebDav配置说明 - 简书 (jianshu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/583005093">latex做ppt</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/roofit_manual/" title="roofit manual">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">roofit manual</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/rootfirststep/" title="First Step of Linux and Root">
+                        <span class="hidden-mobile">First Step of Linux and Root</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      
+<i class="iconfont icon-love"></i> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
