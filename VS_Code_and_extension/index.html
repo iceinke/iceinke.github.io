@@ -131,11 +131,51 @@
           
           
           
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
               </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- 
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://space.bilibili.com/130228752" target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>bilibili</span>
+                  </a>
+                
+                   -->
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item " 
+                    href=&#34;https://space.bilibili.com/130228752&#34; 
+                    target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>bilibili</span>
+                    
+                  </a>
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item qr-trigger" 
+                     
+                    target="_self">
+                    <i class="iconfont icon-wechat-fill"></i>
+                    <span>wechat</span>
+                    
+                      <img class="qr-img" src="/img/wechat.png" srcset="/img/loading.gif" lazyload alt="qrcode" />
+                    
+                  </a>
+                
+              </div>
             </li>
           
         
@@ -246,7 +286,7 @@
 <ul>
 <li><p>下载MobaXterm，<br><a target="_blank" rel="noopener" href="https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip">https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip</a><br>点击上面的链接，即可下载，按照提示进行安装</p>
 </li>
-<li><p>登录nnu集群<br>双击进入MobaXterm程序，点击star local terminal，你可以试试ssh -XY <a href="mailto:&#x7a;&#x68;&#117;&#x66;&#101;&#x6e;&#x67;&#64;&#x32;&#50;&#50;&#46;&#49;&#x39;&#x32;&#x2e;&#x37;&#46;&#x35;&#49;">&#x7a;&#x68;&#117;&#x66;&#101;&#x6e;&#x67;&#64;&#x32;&#50;&#50;&#46;&#49;&#x39;&#x32;&#x2e;&#x37;&#46;&#x35;&#49;</a>能不能直接登录，按理来说也许能登上去，如果登不上去，可以通过修改.ssh&#x2F;config 。</p>
+<li><p>登录nnu集群<br>双击进入MobaXterm程序，点击star local terminal，你可以试试ssh -XY <a href="mailto:&#122;&#x68;&#x75;&#102;&#x65;&#110;&#x67;&#64;&#50;&#50;&#x32;&#x2e;&#49;&#x39;&#50;&#46;&#55;&#46;&#x35;&#x31;">&#122;&#x68;&#x75;&#102;&#x65;&#110;&#x67;&#64;&#50;&#50;&#x32;&#x2e;&#49;&#x39;&#50;&#46;&#55;&#46;&#x35;&#x31;</a>能不能直接登录，按理来说也许能登上去，如果登不上去，可以通过修改.ssh&#x2F;config 。</p>
 </li>
 <li><p>修改ssh配置文件<br>你可能会发现当前路径下没有.ssh&#x2F;这个文件夹，你可以用下面的命令创建一个<br>mkdir .ssh<br>vi .ssh&#x2F;config    创建并修改config文件，输入下面几行</p>
 </li>
@@ -255,7 +295,7 @@
 
 
 <ul>
-<li>再次ssh -XY <a href="mailto:&#x7a;&#x68;&#117;&#102;&#101;&#x6e;&#x67;&#64;&#x32;&#50;&#x32;&#46;&#x31;&#x39;&#50;&#46;&#x37;&#x2e;&#x35;&#49;">&#x7a;&#x68;&#117;&#102;&#101;&#x6e;&#x67;&#64;&#x32;&#50;&#x32;&#46;&#x31;&#x39;&#50;&#46;&#x37;&#x2e;&#x35;&#49;</a> 登录应该就能看到你的文件了，进行课上测试使用 graph-&gt;Draw() 时就能看到图啦！（这个应用甚至在下次能不用你输入密码自动登录）</li>
+<li>再次ssh -XY <a href="mailto:&#x7a;&#104;&#117;&#102;&#x65;&#110;&#x67;&#64;&#50;&#50;&#50;&#x2e;&#x31;&#57;&#50;&#x2e;&#x37;&#46;&#53;&#x31;">&#x7a;&#104;&#117;&#102;&#x65;&#110;&#x67;&#64;&#50;&#50;&#50;&#x2e;&#x31;&#57;&#50;&#x2e;&#x37;&#46;&#53;&#x31;</a> 登录应该就能看到你的文件了，进行课上测试使用 graph-&gt;Draw() 时就能看到图啦！（这个应用甚至在下次能不用你输入密码自动登录）</li>
 </ul>
 <h2 id="X-server-for-Mac"><a href="#X-server-for-Mac" class="headerlink" title="X-server for Mac"></a>X-server for Mac</h2><p>首先下载xquartz，mac用这个链接<a target="_blank" rel="noopener" href="https://www.xquartz.org/releases/XQuartz-2.8.5.html">https://www.xquartz.org/releases/XQuartz-2.8.5.html</a> 下载并安装，打开xquartz应用，在自己的终端上用这个命令，你可以把这个命令放在<code>.bashrc</code>中而不用每次都需要使用这个命令<br><code>export DISPLAY=:0</code><br>之后用这个命令登录集群就能看图了（-XY 就是启用x服务器转发）<br><code>ssh -XY uername@server</code></p>
 <h2 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h2><p>下载<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a>，打开之后请调至dark模式，because light attracts bugs.<br>如果你英文苦手，请在扩展中搜索简体中文，安装重启之后就能显示中文了。当你使用特定的编程语言的时候，右下角会弹出窗口让你安装对应的插件，以方便你的阅读，当然你也可以直接搜索，比如C++去获取插件。</p>
