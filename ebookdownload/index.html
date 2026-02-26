@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://iceinke.github.io/img/post6.jpg">
 <meta property="article:published_time" content="2024-10-12T08:48:11.773Z">
-<meta property="article:modified_time" content="2026-02-02T06:35:54.861Z">
+<meta property="article:modified_time" content="2026-02-26T12:39:56.212Z">
 <meta property="article:author" content="Feng Zhu">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -270,7 +270,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年2月2日
+                    本文最后更新于 2026年2月26日
                   
                 
               </p>
@@ -281,15 +281,25 @@
                 <style>
   .ebook-cover {
     position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
+  
+  .ebook-cover:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
   .ebook-container {
     display: inline-block;
+    vertical-align: top;  /* 让所有容器从顶部对齐 */
     text-align: center;
     margin-bottom: 20px;
     margin-right: 10px;
     margin-left: 10px;
     width: 200px;
   }
+  
   .ebook-title {
     display: block;
     margin-top: 10px;
@@ -297,6 +307,11 @@
     word-wrap: break-word;
     max-width: 200px;
     text-align: center;
+    min-height: 40px; /* 固定最小高度，确保至少容纳两行文字 */
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start; /* 书名从顶部开始显示 */
+    justify-content: center;
   }
 </style>
 
@@ -314,9 +329,11 @@
     "量子场论导论II": "量子场论导论partII Michael Peskin",
     "量子场论导论III": "量子场论导论partIII Michael Peskin",
     "量子场论导论note": "量子场论导论note"
+    
 
     //"高能物理数据分析": "高能物理数据分析 统计方法使用指南 O·贝恩克 K·克朗格宁 G·肖特 T·肖纳-赛德涅斯 -  (2019, 中国科学技术大学出版社)"
     //pdf/封面文件名:书名（用于显示的名称）
+    //要求电子书的pdf文件名/Users/a123123/myblogdir/Hexo-Blog/themes/fluid/source/download和封面的png/Users/a123123/myblogdir/Hexo-Blog/themes/fluid/source/postfigure/ebook文件名一致
   };
 
 
