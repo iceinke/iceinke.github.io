@@ -1,0 +1,1129 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Z001.ico">
+  <link rel="icon" href="/img/Z001.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Feng Zhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="#sheet-container {         width: 100%;     }      .score-grid {         display: grid;         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));         gap: 20px;         margin-top">
+<meta property="og:type" content="website">
+<meta property="og:title" content="乐谱">
+<meta property="og:url" content="http://iceinke.github.io/sheet/index.html">
+<meta property="og:site_name" content="Feng Zhu&#39;s Blog">
+<meta property="og:description" content="#sheet-container {         width: 100%;     }      .score-grid {         display: grid;         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));         gap: 20px;         margin-top">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-24T03:11:27.000Z">
+<meta property="article:modified_time" content="2026-03-24T08:32:56.977Z">
+<meta property="article:author" content="Feng Zhu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>乐谱 - Feng Zhu&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"iceinke.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":250,"cursorChar":" ","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Feng</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- 
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://space.bilibili.com/130228752" target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>bilibili</span>
+                  </a>
+                
+                   -->
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item " 
+                    href=&#34;https://space.bilibili.com/130228752&#34; 
+                    target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>bilibili</span>
+                    
+                  </a>
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item qr-trigger" 
+                     
+                    target="_self">
+                    <i class="iconfont icon-wechat-fill"></i>
+                    <span>wechat</span>
+                    
+                      <img class="qr-img" src="/img/wechat.png" srcset="/img/loading.gif" lazyload alt="qrcode" />
+                    
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/sheet/" target="_self">
+                <i class="iconfont icon-note"></i>
+                <span>乐谱</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post3.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">乐谱</span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <style>
+    #sheet-container {
+        width: 100%;
+    }
+
+    .score-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        margin-top: 18px;
+        justify-items: center;
+    }
+
+    .score-item {
+        text-align: center;
+    }
+
+    .score-stack {
+        position: relative;
+        width: 210px;
+        height: 300px;
+        margin: 10px 0;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .score-stack:focus-visible {
+        outline: 2px solid #2f4154;
+        outline-offset: 4px;
+    }
+
+    .score-layer,
+    .score-cover {
+        position: absolute;
+        top: 0;      
+        left: 0;     
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .score-layer {
+        background: #f3f4f7;
+        border: 1px solid #dde1e9;
+    }
+
+    .score-layer.layer-1 {
+        transform: translate(9px, -7px) rotate(2.4deg);
+    }
+
+    .score-layer.layer-2 {
+        transform: translate(5px, -4px) rotate(1.2deg);
+    }
+
+    .score-cover {
+        transform: translate(0, 0);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: #fff;
+    }
+
+    .score-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .score-stack:hover .score-cover {
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 12px 22px rgba(0, 0, 0, 0.22);
+    }
+
+    .score-pages-badge {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        z-index: 3;
+        font-size: 12px;
+        color: #fff;
+        background: rgba(20, 31, 45, 0.76);
+        border-radius: 999px;
+        padding: 4px 8px;
+    }
+
+    .score-title {
+        margin-top: 12px;
+        font-size: 15px;
+        line-height: 1.4;
+        min-height: 2.8em;
+        font-weight: 600;
+    }
+
+    .score-meta {
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #607184;
+        min-height: 1.5em;
+    }
+
+    .score-modal {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: none;
+        z-index: 20000;
+        padding: 0;
+    }
+
+    body.sheet-modal-open #navbar,
+    body.sheet-modal-open #banner {
+        display: none !important;
+    }
+
+    .score-modal.open {
+        display: block;
+    }
+
+    .score-modal-panel {
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        border-radius: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .score-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 12px 16px;
+        border-bottom: none;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .score-modal-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+        color: #fff;
+    }
+
+    .score-modal-close {
+        border: 0;
+        background: transparent;
+        color: #fff;
+        border-radius: 4px;
+        padding: 6px 8px;
+        cursor: pointer;
+        font-size: 24px;
+        line-height: 1;
+        transition: opacity 0.2s;
+    }
+
+    .score-modal-close:hover {
+        opacity: 0.7;
+    }
+
+    .score-viewer {
+        padding: 0;
+        overflow: hidden;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        pointer-events: none;
+        min-height: 0;
+    }
+
+    .score-main {
+        position: relative;
+        background: #000;
+        border: none;
+        border-radius: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0;
+        overflow: hidden;
+        flex: 1;
+        min-height: 0;
+        pointer-events: auto;
+    }
+
+    .score-viewer.expanded .score-main {
+        display: none;
+    }
+
+    .score-main-image-wrap {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 4px;
+        overflow: auto;
+        pointer-events: auto;
+    }
+
+    .score-main img {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 6px;
+        transform: scale(var(--score-zoom, 1));
+        transform-origin: center center;
+        transition: transform 0.2s ease;
+        cursor: grab;
+        touch-action: none;
+    }
+
+    .score-arrow {
+        position: static;
+        transform: none;
+        border: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        transition: background 0.2s;
+        z-index: 10000;
+        pointer-events: auto;
+    }
+
+    .score-arrow:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+
+    .score-controls {
+        margin-top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 8px 12px;
+        background: rgba(0, 0, 0, 0.4);
+        position: fixed;
+        top: 12px;
+        right: 0;
+        bottom: auto;
+        width: auto;
+        z-index: 10000;
+        pointer-events: auto;
+    }
+
+    .score-zoom-group {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .score-zoom-value {
+        font-size: 12px;
+        color: #aaa;
+        min-width: 45px;
+    }
+
+    #score-page-indicator {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        bottom: auto;
+        transform: translateX(-50%);
+        z-index: 10000;
+        font-size: 12px;
+        color: #aaa;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 4px 8px;
+        border-radius: 4px;
+        pointer-events: none;
+    }
+
+    .score-btn {
+        border: 0;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 6px 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+    }
+
+    .score-btn:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+
+    .score-expanded {
+        margin-top: 0;
+        display: none;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 12px;
+        scroll-snap-type: x proximity;
+        background: #000;
+        flex: 1;
+        align-items: center;
+        pointer-events: auto;
+        min-height: 0;
+    }
+
+    .score-expanded.active {
+        display: flex;
+    }
+
+    .score-expanded img {
+        width: auto;
+        max-width: min(70vw, 550px);
+        height: auto;
+        max-height: 85vh;
+        flex: 0 0 auto;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        scroll-snap-align: start;
+        pointer-events: auto;
+    }
+
+    @media (max-width: 768px) {
+        .score-stack {
+            width: 180px;
+            height: 258px;
+        }
+
+        .score-arrow {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div id="sheet-container"></div>
+
+<script>
+    // 约定：每个曲目的乐谱图命名为 /postfigure/sheet/<id>-1.jpg, <id>-2.jpg ...
+    const scores = [
+        { id: 'wings_please', title: '翼をください', info: '' },
+        { id: 'lemon', title: 'Lemon', info: '' },
+        { id: 'tkzc', title: '天空之城', info: '' },
+        { id: 'みちしるべ', title: 'みちしるべ', info: '' },
+        { id: '双门洞', title: '双门洞', info: '' },
+        { id: 'sincerely', title: 'sincerely', info: '' },
+        { id: '残酷天使的行动纲领', title: '残酷天使的行动纲领', info: '' },
+        { id: 'lightsong', title: 'light song', info: '' },
+        // { id: 'jasmine_variation', title: '茉莉花变奏', pages: 3 },
+        // { id: 'river_etude', title: '河畔练习曲', pages: 4 }
+    ];
+
+    const imageExt = 'jpg';
+    const maxAutoPages = 50;
+    const pageCountCache = new Map();
+    let activeScore = null;
+    let activePage = 1;
+    let currentZoom = 1;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let isDragging = false;
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+
+    // 创建 HTML 结构
+    function createHTMLStructure() {
+        const container = document.getElementById('sheet-container');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div id="score-grid" class="score-grid"></div>
+            <div id="score-modal" class="score-modal" role="dialog" aria-modal="true" aria-label="乐谱查看器">
+                <div class="score-modal-panel">
+                    <div class="score-modal-header">
+                        <h3 id="score-modal-title" class="score-modal-title"></h3>
+                    </div>
+                    <div class="score-viewer">
+                        <div class="score-main">
+                        <div class="score-main-image-wrap">
+                            <img id="score-main-image" alt="乐谱页" />
+                        </div>
+                    </div>
+                    <div class="score-controls">
+                        <button id="score-prev" class="score-arrow prev" type="button" aria-label="上一页">&#8249;</button>
+                        <button id="score-next" class="score-arrow next" type="button" aria-label="下一页">&#8250;</button>
+                        <div class="score-zoom-group">
+                            <button id="score-zoom-out" class="score-btn" type="button" aria-label="缩小">−</button>
+                            <button id="score-zoom-reset" class="score-btn" type="button" aria-label="适配">⟲</button>
+                            <button id="score-zoom-in" class="score-btn" type="button" aria-label="放大">+</button>
+                            <span id="score-zoom-value" class="score-zoom-value">100%</span>
+                        </div>
+                        <button id="score-expand-all-btn" class="score-btn" type="button" aria-label="全部铺展">□</button>
+                        <button id="score-clear-expand-btn" class="score-btn" type="button" aria-label="收起铺展">⊟</button>
+                        <button id="score-modal-close" class="score-modal-close score-btn" type="button" aria-label="关闭">✕</button>
+                    </div>
+                    <span id="score-page-indicator"></span>
+                        <div id="score-expanded" class="score-expanded"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // 延迟获取 DOM 元素，确保它们已加载
+    function getDOMElements() {
+        return {
+            scoreGrid: document.getElementById('score-grid'),
+            modal: document.getElementById('score-modal'),
+            modalTitle: document.getElementById('score-modal-title'),
+            mainImage: document.getElementById('score-main-image'),
+            mainImageWrap: document.querySelector('.score-main-image-wrap'),
+            pageIndicator: document.getElementById('score-page-indicator'),
+            expandedBox: document.getElementById('score-expanded')
+        };
+    }
+
+    function buildImageUrl(scoreId, page) {
+        return `/postfigure/sheet/${scoreId}-${page}.${imageExt}`;
+    }
+
+    function checkImageExists(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = `${url}?t=${Date.now()}`;
+        });
+    }
+
+    async function detectScorePages(score) {
+        if (typeof score.pages === 'number' && score.pages > 0) {
+            return score.pages;
+        }
+
+        if (pageCountCache.has(score.id)) {
+            score.pages = pageCountCache.get(score.id);
+            return score.pages;
+        }
+
+        let detectedPages = 0;
+        for (let i = 1; i <= maxAutoPages; i++) {
+            const exists = await checkImageExists(buildImageUrl(score.id, i));
+            if (!exists) {
+                break;
+            }
+            detectedPages = i;
+        }
+
+        score.pages = Math.max(1, detectedPages);
+        pageCountCache.set(score.id, score.pages);
+        return score.pages;
+    }
+
+    async function hydrateScorePages() {
+        await Promise.all(scores.map((score) => detectScorePages(score)));
+    }
+
+    function applyZoom(value) {
+        const { mainImage } = getDOMElements();
+        const zoomValue = document.getElementById('score-zoom-value');
+        if (!mainImage || !zoomValue) return;
+
+        currentZoom = Math.min(3, Math.max(0.5, value));
+        mainImage.style.setProperty('--score-zoom', String(currentZoom));
+        zoomValue.textContent = `${Math.round(currentZoom * 100)}%`;
+    }
+
+    function renderCards() {
+        const { scoreGrid } = getDOMElements();
+        if (!scoreGrid) {
+            console.error('score-grid element not found');
+            return;
+        }
+
+        scores.forEach((score) => {
+            const item = document.createElement('div');
+            item.className = 'score-item';
+
+            const stackBtn = document.createElement('button');
+            stackBtn.className = 'score-stack';
+            stackBtn.type = 'button';
+            stackBtn.setAttribute('aria-label', `打开 ${score.title}`);
+
+            if (score.pages > 1) {
+                const layer1 = document.createElement('div');
+                layer1.className = 'score-layer layer-1';
+                const layer2 = document.createElement('div');
+                layer2.className = 'score-layer layer-2';
+                stackBtn.appendChild(layer1);
+                stackBtn.appendChild(layer2);
+            }
+
+            const cover = document.createElement('div');
+            cover.className = 'score-cover';
+
+            const img = document.createElement('img');
+            img.src = buildImageUrl(score.id, 1);
+            img.alt = `${score.title} 封面`;
+            cover.appendChild(img);
+
+            const badge = document.createElement('span');
+            badge.className = 'score-pages-badge';
+            badge.textContent = `${score.pages} 页`;
+
+            stackBtn.appendChild(cover);
+            stackBtn.appendChild(badge);
+            stackBtn.addEventListener('click', () => openScore(score));
+
+            const title = document.createElement('div');
+            title.className = 'score-title';
+            title.textContent = score.title;
+
+            const meta = document.createElement('div');
+            meta.className = 'score-meta';
+            meta.textContent = score.info || ` `; /*info 显示*/
+
+            item.appendChild(stackBtn);
+            item.appendChild(title);
+            item.appendChild(meta);
+            scoreGrid.appendChild(item);
+        });
+    }
+
+    function setMainImage(page) {
+        if (!activeScore) return;
+        const { mainImage, pageIndicator } = getDOMElements();
+        if (!mainImage || !pageIndicator) return;
+
+        activePage = Math.min(Math.max(1, page), activeScore.pages);
+        mainImage.src = buildImageUrl(activeScore.id, activePage);
+        mainImage.alt = `${activeScore.title} 第 ${activePage} 页`;
+        pageIndicator.textContent = `第 ${activePage} / ${activeScore.pages} 页`;
+    }
+
+    async function openScore(score) {
+        const { modal, modalTitle, mainImageWrap } = getDOMElements();
+        if (!modal || !modalTitle) return;
+
+        await detectScorePages(score);
+        activeScore = score;
+        activePage = 1;
+        modalTitle.textContent = score.title;
+        setMainImage(1);
+        applyZoom(1);
+        dragOffsetX = 0;
+        dragOffsetY = 0;
+        if (mainImageWrap) mainImageWrap.style.transform = 'translate(0, 0)';
+        clearExpanded();
+        attachDragAndZoomHandlers();
+        modal.classList.add('open');
+        document.body.classList.add('sheet-modal-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const { modal } = getDOMElements();
+        if (!modal) return;
+        modal.classList.remove('open');
+        document.body.classList.remove('sheet-modal-open');
+        document.body.style.overflow = '';
+    }
+
+    function expandPages(count) {
+        const { expandedBox } = getDOMElements();
+        if (!expandedBox || !activeScore) return;
+
+        expandedBox.innerHTML = '';
+
+        for (let i = 1; i <= Math.min(count, activeScore.pages); i++) {
+            const img = document.createElement('img');
+            img.src = buildImageUrl(activeScore.id, i);
+            img.alt = `页面 ${i}`;
+            expandedBox.appendChild(img);
+        }
+
+        if (count > 0) {
+            expandedBox.classList.add('active');
+            const viewer = document.querySelector('.score-viewer');
+            if (viewer) viewer.classList.add('expanded');
+        }
+    }
+
+    function clearExpanded() {
+        const { expandedBox } = getDOMElements();
+        if (!expandedBox) return;
+        expandedBox.innerHTML = '';
+        expandedBox.classList.remove('active');
+        const viewer = document.querySelector('.score-viewer');
+        if (viewer) viewer.classList.remove('expanded');
+    }
+
+    function attachDragAndZoomHandlers() {
+        const { mainImage, mainImageWrap, expandedBox } = getDOMElements();
+        if (!mainImage) return;
+
+        // 鼠标滚轮放缩 - 只在图片上有效
+        const wheelHandler = (event) => {
+            if (event.target.closest('img') || event.target === mainImage) {
+                event.preventDefault();
+                const delta = event.deltaY > 0 ? -0.04 : 0.04;
+                applyZoom(currentZoom + delta);
+            }
+        };
+        mainImage.addEventListener('wheel', wheelHandler, true);
+
+        // 鼠标拖动 - 只在图片放大时有效
+        mainImage.addEventListener('mousedown', (event) => {
+            if (currentZoom <= 1) return;
+            isDragging = true;
+            dragStartX = event.clientX;
+            dragStartY = event.clientY;
+            mainImage.style.cursor = 'grabbing';
+        });
+
+        const handleMouseMove = (event) => {
+            if (!isDragging || currentZoom <= 1) return;
+            const deltaX = event.clientX - dragStartX;
+            const deltaY = event.clientY - dragStartY;
+            dragOffsetX += deltaX * 0.5;
+            dragOffsetY += deltaY * 0.5;
+            dragStartX = event.clientX;
+            dragStartY = event.clientY;
+            if (mainImageWrap) {
+                mainImageWrap.style.transform = `translate(${dragOffsetX}px, ${dragOffsetY}px)`;
+            }
+        };
+
+        const handleMouseUp = () => {
+            isDragging = false;
+            mainImage.style.cursor = 'grab';
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+
+        // 触摸双指缩放
+        let lastDistance = 0;
+        mainImage.addEventListener('touchstart', (event) => {
+            if (event.touches.length === 2) {
+                const touch1 = event.touches[0];
+                const touch2 = event.touches[1];
+                lastDistance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+            }
+        });
+
+        mainImage.addEventListener('touchmove', (event) => {
+            if (event.touches.length === 2) {
+                event.preventDefault();
+                const touch1 = event.touches[0];
+                const touch2 = event.touches[1];
+                const currentDistance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+                if (lastDistance > 0) {
+                    const delta = (currentDistance - lastDistance) * 0.005;
+                    applyZoom(currentZoom + delta);
+                }
+                lastDistance = currentDistance;
+            }
+        });
+    }
+
+    function attachEventListeners() {
+        const prevBtn = document.getElementById('score-prev');
+        const nextBtn = document.getElementById('score-next');
+        const expandAllBtn = document.getElementById('score-expand-all-btn');
+        const clearExpandBtn = document.getElementById('score-clear-expand-btn');
+        const zoomInBtn = document.getElementById('score-zoom-in');
+        const zoomOutBtn = document.getElementById('score-zoom-out');
+        const zoomResetBtn = document.getElementById('score-zoom-reset');
+        const closeBtn = document.getElementById('score-modal-close');
+        const { modal } = getDOMElements();
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (!activeScore) return;
+                const prev = activePage - 1 < 1 ? activeScore.pages : activePage - 1;
+                setMainImage(prev);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (!activeScore) return;
+                const next = activePage + 1 > activeScore.pages ? 1 : activePage + 1;
+                setMainImage(next);
+            });
+        }
+
+        if (expandAllBtn) {
+            expandAllBtn.addEventListener('click', () => {
+                if (!activeScore) return;
+                expandPages(activeScore.pages);
+            });
+        }
+
+        if (clearExpandBtn) {
+            clearExpandBtn.addEventListener('click', clearExpanded);
+        }
+
+        if (zoomInBtn) {
+            zoomInBtn.addEventListener('click', () => applyZoom(currentZoom + 0.2));
+        }
+
+        if (zoomOutBtn) {
+            zoomOutBtn.addEventListener('click', () => applyZoom(currentZoom - 0.2));
+        }
+
+        if (zoomResetBtn) {
+            zoomResetBtn.addEventListener('click', () => {
+                applyZoom(1);
+                dragOffsetX = 0;
+                dragOffsetY = 0;
+                const { mainImageWrap } = getDOMElements();
+                if (mainImageWrap) mainImageWrap.style.transform = 'translate(0, 0)';
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        if (modal) {
+            // 防止 modal 背景的点击传递
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) closeModal();
+            });
+
+            // 防止modal滚轮事件传递到页面
+            modal.addEventListener('wheel', (event) => {
+                // 只有在图片上时才处理
+                if (event.target.closest('img') || event.target.closest('.score-main-image-wrap')) {
+                    // 滚轮已在 attachDragAndZoomHandlers 中处理
+                }
+            }, { passive: false });
+        }
+    }
+
+    async function initSheet() {
+        createHTMLStructure();
+        await hydrateScorePages();
+        renderCards();
+        attachEventListeners();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initSheet();
+        });
+    } else {
+        initSheet();
+    }
+
+    document.addEventListener('keydown', (event) => {
+        const { modal } = getDOMElements();
+        if (!modal || !modal.classList.contains('open')) return;
+        if (event.key === 'Escape') closeModal();
+        if (event.key === 'ArrowLeft') {
+            const prevBtn = document.getElementById('score-prev');
+            if (prevBtn) prevBtn.click();
+        }
+        if (event.key === 'ArrowRight') {
+            const nextBtn = document.getElementById('score-next');
+            if (nextBtn) nextBtn.click();
+        }
+        if (event.key === '+' || event.key === '=') applyZoom(currentZoom + 0.2);
+        if (event.key === '-') applyZoom(currentZoom - 0.2);
+    });
+    
+</script>
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      
+<i class="iconfont icon-love"></i> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
