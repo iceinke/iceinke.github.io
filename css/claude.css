@@ -1,0 +1,34 @@
+/* Claude Code 风格补充样式：代码块 / 行内代码 / 选区 / 引用块 */
+
+/* 代码块背景改为 Claude 暖色调 */
+:root {
+  --highlight-bg-color: #F0EEE6;
+  --inlinecode-bg-color: rgba(217, 119, 87, 0.12);
+}
+
+[data-user-color-scheme="dark"] {
+  --highlight-bg-color: #1A1917;
+  --inlinecode-bg-color: rgba(217, 119, 87, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-user-color-scheme]) {
+    --highlight-bg-color: #1A1917;
+    --inlinecode-bg-color: rgba(217, 119, 87, 0.2);
+  }
+}
+
+/* 代码字体统一为等宽栈 */
+code, pre, kbd, samp, .hljs {
+  font-family: "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", "NSimSun", "SimSun", "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", monospace;
+}
+
+/* 文本选区：Claude 赤陶橙 */
+::selection {
+  background-color: rgba(217, 119, 87, 0.3);
+}
+
+/* 引用块左侧边线改为 Claude 橙 */
+.markdown-body blockquote {
+  border-left: 0.25em solid #D97757;
+}
