@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>口琴简谱移调与孔位映射工具</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --ink:#1f2733; --muted:#6b7686;
+    --line:#e3e8f0; --brand:#1565c0; --brand2:#0d47a1; --accent:#e65100;
+    --danger:#c62828; --ok:#2e7d32; --hl:#ffc107; --radius:14px;
+    --shadow:0 2px 10px rgba(20,35,60,.08);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+    line-height:1.55;
+  }
+  header{
+    background:linear-gradient(135deg,var(--brand2),var(--brand));
+    color:#fff; padding:26px 20px 30px; text-align:center;
+  }
+  header h1{margin:0 0 6px; font-size:26px; letter-spacing:.5px}
+  header p{margin:0; opacity:.92; font-size:14px}
+  main{max-width:1000px; margin:-16px auto 40px; padding:0 16px}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:18px; margin-bottom:18px;
+  }
+  .card h2{margin:0 0 12px; font-size:16px; color:var(--brand2);
+    display:flex; align-items:center; gap:8px}
+  .card h2::before{content:""; width:5px; height:16px; background:var(--brand); border-radius:3px}
+  textarea{
+    width:100%; min-height:130px; resize:vertical; padding:12px; font-size:15px;
+    font-family:ui-monospace,Consolas,monospace; color:var(--ink);
+    border:1px solid var(--line); border-radius:10px; background:#fbfcfe; line-height:1.7;
+  }
+  textarea:focus{outline:2px solid rgba(21,101,192,.35); border-color:var(--brand)}
+  .controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:12px}
+  button,select{
+    border:1px solid var(--line); background:#fff; color:var(--ink); padding:8px 16px;
+    border-radius:9px; font-size:14px; cursor:pointer; transition:.15s; font-family:inherit;
+  }
+  button:hover{border-color:var(--brand); color:var(--brand)}
+  button.primary{background:var(--brand); border-color:var(--brand); color:#fff}
+  button.primary:hover{background:var(--brand2); color:#fff}
+  button.play{background:var(--ok); border-color:var(--ok); color:#fff}
+  button.play:hover{filter:brightness(1.08); color:#fff}
+  button.stop{background:#78909c; border-color:#78909c; color:#fff}
+  button.stop:hover{filter:brightness(1.05); color:#fff}
+  .tempo{display:flex; align-items:center; gap:8px; font-size:14px; color:var(--muted)}
+  .tempo input[type=range]{width:130px}
+  #info{margin-top:14px; display:flex; flex-wrap:wrap; gap:10px}
+  .chip{
+    background:#eef3fb; border:1px solid #d7e3f7; color:#1a3a63; padding:6px 12px;
+    border-radius:999px; font-size:13px;
+  }
+  .chip.warn{background:#fdecea; border-color:#f5c6c0; color:var(--danger)}
+  .chip.good{background:#e8f5e9; border-color:#c8e6c9; color:var(--ok)}
+  #warnings{margin-top:10px; font-size:13px; color:var(--danger)}
+  #scoreWrap{overflow-x:auto; padding:6px 2px}
+  #score{display:block; height:auto}
+  #score text{font-family:"PingFang SC","Microsoft YaHei",sans-serif; user-select:none}
+  .digit{font-size:27px; font-weight:700; fill:#222}
+  .acc{font-size:17px; font-weight:700; fill:#222}
+  .holeann{font-size:13px; font-weight:600; fill:var(--brand)}
+  .holeann.slide{fill:var(--accent)}
+  .holeann.oor{fill:var(--danger)}
+  .keytext{font-size:21px; font-weight:700; fill:#222}
+  #score line{stroke:#37474f; stroke-width:2}
+  #score .bar{stroke:#546e7a; stroke-width:1.6}
+  #score .bar.thick{stroke-width:5}
+  #score .hold{stroke:#37474f; stroke-width:2.4}
+  #score .tiedash{fill:none; stroke:#37474f; stroke-width:1.8}
+  #score .fermata{fill:none; stroke:#222; stroke-width:2}
+  #score circle{fill:#222}
+  .titletext{font-size:24px; font-weight:700; fill:#111}
+  .exportbar{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; align-items:center}
+  .zoomctl{display:flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); margin-right:auto}
+  .zoomctl button{padding:4px 10px; font-size:13px; line-height:1.2}
+  .zoomctl input[type=range]{width:110px}
+  .zoomctl .zoomval{min-width:42px; text-align:center; color:var(--ink); font-weight:600; font-size:13px}
+  .hlrect{fill:var(--hl); opacity:0}
+  .note.playing .hlrect{opacity:.32}
+  .note.oor .digit,.note.oor .acc{fill:var(--danger)}
+  details{margin-top:6px}
+  summary{cursor:pointer; color:var(--brand); font-size:14px; user-select:none}
+  .help{font-size:13px; color:var(--muted); margin-top:10px}
+  .help code{background:#eef2f8; padding:1px 6px; border-radius:5px; font-size:12px; color:#0d47a1}
+  .help table{border-collapse:collapse; margin-top:8px}
+  .help td,.help th{border:1px solid var(--line); padding:3px 9px; font-size:12px; text-align:center}
+  #reference table{border-collapse:collapse; width:100%; margin-top:4px}
+  #reference th,#reference td{border:1px solid var(--line); padding:6px 8px; text-align:center; font-size:13px}
+  #reference th{background:#eef3fb; color:#1a3a63}
+  #reference td:nth-child(1){font-weight:700; color:var(--brand2)}
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:13px; color:var(--muted)}
+  .legend span{display:inline-flex; align-items:center; gap:6px}
+  .swatch{width:14px; height:14px; border-radius:4px; display:inline-block}
+  footer{text-align:center; color:var(--muted); font-size:12px; padding:10px 0 26px}
+</style>
+</head>
+<body>
+<header>
+  <h1>口琴简谱移调与孔位映射工具</h1>
+  <p>C 调 12 孔半音阶口琴（独奏音域 C4–C7）· 任意调乐谱直接转换为 1=C · 孔位/吹吸/按键标注 · 在线试听</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>简谱输入</h2>
+    <textarea id="input" spellcheck="false"></textarea>
+    <div class="controls">
+      <button class="primary" id="renderBtn">渲染乐谱</button>
+      <button class="play" id="playBtn">▶ 播放</button>
+      <button class="stop" id="stopBtn">■ 停止</button>
+      <button id="octaveDown">八度 −</button>
+      <button id="octaveUp">八度 +</button>
+      <label class="tempo">速度
+        <input type="range" id="tempo" min="40" max="200" value="90">
+        <span id="tempoVal">90 BPM</span>
+      </label>
+      <select id="samples">
+        <option value="">载入示例…</option>
+        <option value="star">小星星（基础）</option>
+        <option value="scale">音阶练习（高八度点）</option>
+        <option value="chromatic">半音练习（按键 ●）</option>
+        <option value="sustain">延音示例（延音线 ~ / 延长记号 *）</option>
+      </select>
+    </div>
+    <div id="info"></div>
+    <div id="warnings"></div>
+  </section>
+
+  <section class="card">
+    <h2>乐谱与孔位标注</h2>
+    <div class="exportbar">
+      <div class="zoomctl">
+        <span>乐谱大小</span>
+        <button id="zoomOut" title="缩小乐谱">−</button>
+        <input type="range" id="zoom" min="50" max="160" step="5" value="80"
+          title="调整乐谱大小：缩小时每行自动容纳更多音符，放大时自动换行重排">
+        <button id="zoomIn" title="放大乐谱">＋</button>
+        <span class="zoomval" id="zoomVal">80%</span>
+        <button id="zoomReset" title="恢复默认大小">默认</button>
+      </div>
+      <button id="exportPng">导出 PNG</button>
+      <button id="exportPdf">导出 PDF</button>
+      <button id="exportSvg">导出 SVG</button>
+    </div>
+    <div id="scoreWrap"><svg id="score" xmlns="http://www.w3.org/2000/svg"></svg></div>
+    <div class="legend">
+      <span><span class="swatch" style="background:#1565c0"></span>普通孔位（吹/吸）</span>
+      <span><span class="swatch" style="background:#e65100"></span>需按按键 ●（半音）</span>
+      <span><span class="swatch" style="background:#c62828"></span>超出音域 C4–C7</span>
+      <span><span class="swatch" style="background:#ffc107"></span>播放中高亮</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>记谱语法说明</h2>
+    <div class="help">
+      <table>
+        <tr><th>写法</th><th>含义</th><th>写法</th><th>含义</th></tr>
+        <tr><td><code>1</code>~<code>7</code></td><td>唱名</td><td><code>0</code></td><td>休止符</td></tr>
+        <tr><td><code>#4</code> / <code>b7</code></td><td>升/降半音</td><td><code>|</code> / <code>||</code></td><td>小节线 / 终止线</td></tr>
+        <tr><td><code>1'</code> <code>1^</code> <code>+1</code></td><td>高八度点</td><td><code>,1</code> <code>.1</code> <code>-1</code></td><td>低八度点</td></tr>
+        <tr><td><code>1_</code></td><td>八分音符（下划线）</td><td><code>1=</code></td><td>十六分音符（双下划线）</td></tr>
+        <tr><td><code>1.</code></td><td>附点（延长一半）</td><td><code>1 - -</code></td><td>延长线（每 <code>-</code> 加一拍）</td></tr>
+        <tr><td><code>5 ~ 5</code></td><td>延音线（连接两个同音高音符，第二个音不重新发声）</td><td><code>5*</code></td><td>延长记号（自由延长，约增加一半时值）</td></tr>
+        <tr><td><code>《标题》</code> 或 <code>标题: 名称</code></td><td>乐谱标题（居中显示在乐谱顶部）</td><td><code>~</code> / <code>*</code></td><td>也可单独写在音符之后</td></tr>
+        <tr><td><code>1=G</code></td><td>调号（乐谱按实际音高转为 1=C）</td><td><code>2/4</code></td><td>拍号</td></tr>
+      </table>
+      <p style="margin-top:8px">提示：输入其他调（如 <code>1=G</code>）时，下方乐谱会直接按实际音高转换为 1=C 记谱（唱名、升降号、八度点随之换算，音高不变，如 1=G 的「1」转为「5」），孔位按 C 调独奏音位自动映射。低八度点写在数字<em>前</em>，附点写在数字<em>后</em>。乐谱标题可用 <code>《标题》</code> 或单独一行 <code>标题: 名称</code> 指定；乐谱卡片左上角的「乐谱大小」滑块可缩放乐谱（缩小时每行自动容纳更多音符并重新排列，放大时自动换行），导出 PNG / PDF / SVG 时均按当前大小；窗口尺寸变化后乐谱也会自动重排。</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>12 孔 C 调半音阶口琴音位参考</h2>
+    <div id="reference"></div>
+  </section>
+</main>
+
+<footer>离线可用 · 纯前端单文件 · Web Audio 合成音色</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================== 常量与音位表 ===================== */
+// 唱名 -> 相对 C 的半音偏移
+const DEGREE_OFFSET = {1:0,2:2,3:4,4:5,5:7,6:9,7:11};
+// 调名字母 -> 半音
+const KEY_SEMITONE = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+const NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+
+// 每个音级(+变化音) 相对本八度基准孔 N 的孔位偏移、吹吸、是否按键
+// 规则来源：agent.md domain_rules
+const NOTE_MAP = {
+  '1,0':  {off:0, dir:'blow', slide:0}, // 1 = N 吹
+  '2,0':  {off:0, dir:'draw', slide:0}, // 2 = N 吸
+  '3,0':  {off:1, dir:'blow', slide:0}, // 3 = N+1 吹
+  '4,0':  {off:1, dir:'draw', slide:0}, // 4 = N+1 吸
+  '5,0':  {off:2, dir:'blow', slide:0}, // 5 = N+2 吹
+  '6,0':  {off:2, dir:'draw', slide:0}, // 6 = N+2 吸
+  '7,0':  {off:3, dir:'draw', slide:0}, // 7 = N+3 吸
+  '1,1':  {off:0, dir:'blow', slide:1}, // #1 = N 吹●
+  '2,1':  {off:0, dir:'draw', slide:1}, // #2 = N 吸●
+  '3,1':  {off:1, dir:'draw', slide:0}, // #3(=4) = N+1 吸，无需按键
+  '4,1':  {off:1, dir:'draw', slide:1}, // #4 = N+1 吸●
+  '5,1':  {off:2, dir:'blow', slide:1}, // #5 = N+2 吹●
+  '6,1':  {off:2, dir:'draw', slide:1}, // #6 = N+2 吸●
+  '7,1':  {off:3, dir:'blow', slide:0}, // #7(=高1) = N+3 吹，无需按键
+  '2,-1': {off:0, dir:'blow', slide:1}, // b2(=#1) = N 吹●
+  '3,-1': {off:0, dir:'draw', slide:1}, // b3(=#2) = N 吸●
+  '4,-1': {off:1, dir:'blow', slide:0}, // b4(=3) = N+1 吹，无需按键
+  '5,-1': {off:1, dir:'draw', slide:1}, // b5(=#4) = N+1 吸●
+  '6,-1': {off:2, dir:'blow', slide:1}, // b6(=#5) = N+2 吹●
+  '7,-1': {off:2, dir:'draw', slide:1}  // b7(=#6) = N+2 吸●
+};
+
+// 半音阶口琴音位（MIDI），用于音位参考表与校验
+// 八度1:孔1-4, 八度2:孔5-8, 八度3:孔9-12
+const BLOW_MIDI = [60,64,67,72,72,76,79,84,84,88,91,96];
+const DRAW_MIDI = [62,65,69,71,74,77,81,83,86,89,93,95];
+// 有效音域 C4(60) ~ C7(96)
+const MIDI_MIN = 60, MIDI_MAX = 96;
+
+/* ===================== 状态 ===================== */
+const DEFAULT_SCALE = 0.8; // 默认乐谱缩放（80%，比旧版更小巧）
+
+const state = {
+  events: [],       // 解析出的事件序列
+  keyInfo: null,    // {original, semitone}
+  timeSig: null,    // 如 "2/4"
+  title: '',        // 乐谱标题
+  warnings: [],
+  octaveShift: 0,   // 全局八度移动
+  bpm: 90,
+  outOfRange: 0,
+  scale: DEFAULT_SCALE // 乐谱缩放比例（缩小时每行自动容纳更多音符）
+};
+
+/* ===================== 工具 ===================== */
+const SVG_NS = 'http://www.w3.org/2000/svg';
+function svgEl(tag){ return document.createElementNS(SVG_NS, tag); }
+function midiToName(m){ return NOTE_NAMES[((m%12)+12)%12] + (Math.floor(m/12)-1); }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ===================== 标题提取 ===================== */
+function extractTitle(text){
+  const m = text.match(/《([^》]+)》/);
+  if (m) return {title: m[1].trim(), rest: text.replace(m[0], ' ')};
+  const lines = text.split('\n');
+  for (let i = 0; i < lines.length; i++){
+    const lm = lines[i].match(/^\s*(?:标题|题目|title|T)\s*[:：]\s*(.+?)\s*$/i);
+    if (lm) return {title: lm[1].trim(), rest: lines.filter((_, j) => j !== i).join('\n')};
+  }
+  return {title: '', rest: text};
+}
+
+// 全角/音乐符号规范化
+function normalizeText(s){
+  let out = '';
+  for (const ch of s){
+    const code = ch.codePointAt(0);
+    if (code >= 0xFF01 && code <= 0xFF5E){          // 全角 ASCII 区
+      out += String.fromCharCode(code - 0xFEE0);
+    } else if (ch === '♯'){ out += '#';
+    } else if (ch === '♭'){ out += 'b';
+    } else if (ch === '‖' || ch === '∥'){ out += ' || ';
+    } else if (ch === '－' || ch === '—'){ out += ' - ';
+    } else if (ch === '〜'){ out += ' ~ ';
+    } else if (ch === '𝄐'){ out += ' * ';
+    } else { out += ch; }
+  }
+  return out.replace(/[ \t]+/g,' ');
+}
+
+/* ===================== 解析器 ===================== */
+function parseKey(tok){
+  const m = tok.match(/^1=([#b]?)([A-Ga-g])$/);
+  if (!m) return null;
+  const acc = m[1]==='#'?1 : m[1]==='b'?-1 : 0;
+  const letter = m[2].toUpperCase();
+  const semi = ((KEY_SEMITONE[letter] + acc) % 12 + 12) % 12;
+  return {original: m[1] + letter, semitone: semi};
+}
+
+function parseNoteToken(tok){
+  let i = 0, octave = 0;
+  // 前置八度记号：+ 高八度；- , . 低八度
+  while (i < tok.length){
+    const c = tok[i];
+    if (c === '+'){ octave++; i++; }
+    else if (c === '-' || c === ',' || c === '.'){ octave--; i++; }
+    else break;
+  }
+  // 变化音
+  let accidental = 0;
+  if (i < tok.length && tok[i] === '#'){ accidental = 1; i++; }
+  else if (i < tok.length && tok[i] === 'b'){ accidental = -1; i++; }
+  // 唱名数字
+  if (i >= tok.length) return null;
+  const digit = parseInt(tok[i], 10);
+  if (isNaN(digit) || digit < 0 || digit > 7) return null;
+  i++;
+  // 后置高八度记号
+  while (i < tok.length && (tok[i] === "'" || tok[i] === '^')){ octave++; i++; }
+  // 时值记号
+  let rhythm = 'q', dotted = false, holdCount = 0, fermata = false;
+  while (i < tok.length){
+    const c = tok[i];
+    if (c === '_'){ rhythm = 'e'; i++; }
+    else if (c === '='){ rhythm = 's'; i++; }
+    else if (c === '.'){ dotted = true; i++; }
+    else if (c === '-'){ holdCount++; i++; }
+    else if (c === '*'){ fermata = true; i++; }
+    else break;
+  }
+  return {digit, accidental, octave, rhythm, dotted, holdCount, fermata};
+}
+
+function attachHold(events, count){
+  for (let i = events.length - 1; i >= 0; i--){
+    if (events[i].type === 'note'){ events[i].holdCount += count; return; }
+  }
+}
+
+function parse(text){
+  const warnings = [];
+  const {title, rest} = extractTitle(text);
+  let s = normalizeText(rest);
+  s = s.replace(/\|\|/g,' || ').replace(/\|/g,' | ');
+  const tokens = s.trim().split(/\s+/).filter(t => t.length > 0);
+  const events = [];
+  let keyInfo = null, timeSig = null;
+  let pendingTie = false;
+
+  const findLastNote = () => {
+    for (let i = events.length - 1; i >= 0; i--){
+      if (events[i].type === 'note') return events[i];
+    }
+    return null;
+  };
+
+  // 推入音符，同时处理待定的延音线（与前一同音高音符连接）
+  const pushNote = (ev) => {
+    if (pendingTie){
+      pendingTie = false;
+      const p = findLastNote();
+      if (!p){ warnings.push('延音线「~」前缺少音符，已忽略'); }
+      else if (p.digit === 0 || ev.digit === 0){ warnings.push('延音线不能连接休止符，已忽略'); }
+      else if (p.digit === ev.digit && p.accidental === ev.accidental && p.octave === ev.octave){ ev.tiedFromPrev = true; }
+      else { warnings.push('延音线两端的音高不同，已按普通音符处理'); }
+    }
+    events.push(ev);
+  };
+
+  const handleToken = (tok) => {
+    if (tok === '|'){ events.push({type:'bar'}); return; }
+    if (tok === '||'){ events.push({type:'endbar'}); return; }
+    if (/^1=[A-Ga-g#b]+$/.test(tok)){ keyInfo = parseKey(tok); return; }
+    if (/^\d\/\d$/.test(tok)){ timeSig = tok; return; }
+    if (/^-+$/.test(tok)){ attachHold(events, tok.length); return; }
+    if (/^\*+$/.test(tok)){
+      const p = findLastNote();
+      if (p){ p.fermata = true; }
+      else { warnings.push('延长记号「*」前缺少音符，已忽略'); }
+      return;
+    }
+    // 纯数字串 -> 拆分为连续音符（如 12345）
+    if (/^[0-7]+$/.test(tok)){
+      for (const ch of tok){
+        pushNote({type:'note', digit:parseInt(ch,10), accidental:0, octave:0,
+                  rhythm:'q', dotted:false, holdCount:0, fermata:false});
+      }
+      return;
+    }
+    const note = parseNoteToken(tok);
+    if (note){ pushNote({type:'note', ...note}); }
+    else { warnings.push('无法识别的记号：「' + tok + '」'); }
+  };
+
+  for (const tok of tokens){
+    if (tok.indexOf('~') === -1){ handleToken(tok); continue; }
+    // 含 ~ 的记号：连接前后音符的延音线（如 5~5）
+    const parts = tok.split('~');
+    for (let pi = 0; pi < parts.length; pi++){
+      if (pi > 0) pendingTie = true;
+      if (parts[pi].length) handleToken(parts[pi]);
+    }
+  }
+  if (pendingTie) warnings.push('结尾的延音线「~」缺少后续音符，已忽略');
+  return {events, keyInfo, timeSig, warnings, title};
+}
+
+/* ===================== 移调：按实际音高转换为 1=C ===================== */
+const PC_DIA = {0:{d:1,a:0},2:{d:2,a:0},4:{d:3,a:0},5:{d:4,a:0},7:{d:5,a:0},9:{d:6,a:0},11:{d:7,a:0}};
+const PC_SHARP = {1:{d:1,a:1},3:{d:2,a:1},6:{d:4,a:1},8:{d:5,a:1},10:{d:6,a:1}};
+const PC_FLAT = {1:{d:2,a:-1},3:{d:3,a:-1},6:{d:5,a:-1},8:{d:6,a:-1},10:{d:7,a:-1}};
+
+function transposeToC(events, keyInfo){
+  if (!keyInfo || keyInfo.semitone === 0) return;
+  const shift = keyInfo.semitone;
+  const table = (keyInfo.original[0] === 'b' || keyInfo.original === 'F') ? PC_FLAT : PC_SHARP;
+  for (const ev of events){
+    if (ev.type !== 'note' || ev.digit === 0) continue;
+    const abs = ev.octave * 12 + shift + DEGREE_OFFSET[ev.digit] + ev.accidental;
+    const pc = ((abs % 12) + 12) % 12;
+    const t = PC_DIA[pc] || table[pc];
+    ev.octave = Math.floor(abs / 12);
+    ev.digit = t.d;
+    ev.accidental = t.a;
+  }
+}
+
+/* ===================== 孔位映射与音高 ===================== */
+function mapNoteToHole(ev){
+  let d = ev.digit, a = ev.accidental;
+  // 无八度点 = 第 2 八度（孔5-8，C5 起）
+  let oct = 2 + ev.octave + state.octaveShift;
+  // b1 = 低八度的 7（B）
+  if (d === 1 && a === -1){ d = 7; a = 0; oct--; }
+  const N = {1:1, 2:5, 3:9}[oct];
+  if (!N) return {outOfRange:true};
+  const entry = NOTE_MAP[d + ',' + a];
+  if (!entry) return {outOfRange:true};
+  const hole = N + entry.off;
+  if (hole < 1 || hole > 12) return {outOfRange:true};
+  return {hole, dir:entry.dir, slide:entry.slide, outOfRange:false};
+}
+
+function getMidi(ev){
+  const off = DEGREE_OFFSET[ev.digit];
+  if (off === undefined) return null;
+  return 72 + (ev.octave + state.octaveShift) * 12 + off + ev.accidental;
+}
+
+const FERMATA_FACTOR = 1.5; // 延长记号：时值约延长一半
+
+function noteBeats(ev){
+  let base = ev.rhythm === 'e' ? 0.5 : ev.rhythm === 's' ? 0.25 : 1;
+  if (ev.dotted) base *= 1.5;
+  return (base + ev.holdCount) * (ev.fermata ? FERMATA_FACTOR : 1);
+}
+
+// 预计算每个音符的孔位、音高、标注
+function prepare(){
+  state.outOfRange = 0;
+  for (const ev of state.events){
+    if (ev.type !== 'note') continue;
+    if (ev.digit === 0){ ev.holeMap = null; ev.midi = null; ev.annotation = ''; ev.outOfRange = false; continue; }
+    ev.holeMap = mapNoteToHole(ev);
+    ev.midi = getMidi(ev);
+    const bad = ev.holeMap.outOfRange || ev.midi === null || ev.midi < MIDI_MIN || ev.midi > MIDI_MAX;
+    ev.outOfRange = bad;
+    if (bad){
+      state.outOfRange++;
+      ev.annotation = '✕';
+    } else {
+      const dir = ev.holeMap.dir === 'blow' ? '吹' : '吸';
+      ev.annotation = ev.holeMap.hole + dir + (ev.holeMap.slide ? '●' : '');
+    }
+  }
+}
+
+/* ===================== SVG 渲染 ===================== */
+const LAYOUT = {
+  cellW:44, barW:26, lineH:128, marginX:30, marginTop:10, headerH:40,
+  beamDrop:14, beamGap:7, dotDrop:9
+};
+
+// 连音线分组：相邻的八分/十六分音符（同谱行、未被小节线/休止符/长音打断）归为一组
+function computeBeams(events){
+  const groups = [];
+  let cur = null;
+  for (const ev of events){
+    if (ev.type === 'note') ev.beamDepth = 0;
+  }
+  for (const ev of events){
+    const beamable = ev.type === 'note' && ev.digit !== 0 &&
+      (ev.rhythm === 'e' || ev.rhythm === 's') && ev.holdCount === 0;
+    if (beamable){
+      if (cur && cur.y === ev.y) cur.notes.push(ev);
+      else { cur = {notes:[ev], y:ev.y}; groups.push(cur); }
+    } else {
+      cur = null;
+    }
+  }
+  for (const grp of groups){
+    for (const n of grp.notes){
+      n.beamDepth = n.rhythm === 's' ? 2 : 1;
+    }
+  }
+  return groups;
+}
+
+// 绘制连续横线：一级线贯穿整组，二级线只覆盖连续的十六分音段
+function drawBeams(svg, groups){
+  const {beamDrop, beamGap} = LAYOUT;
+  const mk = (x1, x2, yy) => {
+    const l = svgEl('line');
+    l.setAttribute('x1',x1); l.setAttribute('x2',x2);
+    l.setAttribute('y1',yy); l.setAttribute('y2',yy);
+    svg.appendChild(l);
+  };
+  for (const grp of groups){
+    const notes = grp.notes, y = grp.y;
+    const x1 = notes[0].x + 8, x2 = notes[notes.length-1].x + 33;
+    mk(x1, x2, y + beamDrop);
+    let start = null, prev = null;
+    const flush = () => {
+      if (start) mk(start.x + 8, prev.x + 33, y + beamDrop + beamGap);
+      start = prev = null;
+    };
+    for (const n of notes){
+      if (n.rhythm === 's'){ if (!start) start = n; prev = n; }
+      else flush();
+    }
+    flush();
+  }
+}
+
+function render(){
+  const svg = document.getElementById('score');
+  const wrap = document.getElementById('scoreWrap');
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  const events = state.events;
+  if (!events.length){
+    svg.removeAttribute('viewBox');
+    svg.style.width = ''; svg.style.height = '';
+    return;
+  }
+
+  // 缩放布局：显示可用宽度固定，缩放比例决定设计坐标系中每行的容量
+  // scale 越小 -> maxW 越大 -> 每行容纳更多音符（自动重新排列）；scale 越大 -> 提前换行
+  const scale = state.scale;
+  const {cellW, barW, lineH, marginX, marginTop, headerH} = LAYOUT;
+  const availW = Math.max(320, (wrap.clientWidth || 860) - 8); // 容器内可用显示宽度（像素）
+  const maxW = Math.max(260, availW / scale - marginX * 2);    // 设计坐标系中的每行宽度
+  const titleH = state.title ? 46 : 0;
+  const baseYOf = li => marginTop + titleH + headerH + 62 + li * lineH;
+
+  // 布局：逐个事件分配坐标并自动换行
+  let x = marginX, lineIdx = 0;
+  for (const ev of events){
+    if (ev.type === 'note'){
+      const w = (1 + ev.holdCount) * cellW;
+      if (x + w > marginX + maxW){ x = marginX; lineIdx++; }
+      ev.x = x; ev.y = baseYOf(lineIdx); x += w;
+    } else {
+      if (x + barW > marginX + maxW){ x = marginX; lineIdx++; }
+      ev.x = x; ev.y = baseYOf(lineIdx); x += barW;
+    }
+  }
+  const totalW = marginX*2 + maxW;
+  const totalH = marginTop + titleH + headerH + 62 + lineIdx*lineH + 70;
+  svg.setAttribute('viewBox', '0 0 ' + totalW + ' ' + totalH);
+  // 按当前缩放比例设定显示尺寸（导出时也按此尺寸）
+  svg.style.width = (totalW * scale) + 'px';
+  svg.style.height = (totalH * scale) + 'px';
+
+  // 乐谱标题（顶部居中）
+  if (state.title){
+    const tt = svgEl('text');
+    tt.setAttribute('x', totalW / 2); tt.setAttribute('y', marginTop + 30);
+    tt.setAttribute('text-anchor','middle'); tt.setAttribute('class','titletext');
+    tt.textContent = state.title;
+    svg.appendChild(tt);
+  }
+
+  // 调号(强制 1=C)与拍号
+  const keyText = svgEl('text');
+  keyText.setAttribute('x', marginX); keyText.setAttribute('y', marginTop + titleH + 30);
+  keyText.setAttribute('class','keytext'); keyText.textContent = '1=C';
+  svg.appendChild(keyText);
+  if (state.timeSig){
+    const ts = svgEl('text');
+    ts.setAttribute('x', marginX + 62); ts.setAttribute('y', marginTop + titleH + 30);
+    ts.setAttribute('class','keytext'); ts.textContent = state.timeSig;
+    svg.appendChild(ts);
+  }
+
+  const beamGroups = computeBeams(events);
+  const tiePairs = [];
+  let lastNoteEv = null;
+  for (const ev of events){
+    if (ev.type !== 'note') continue;
+    if (ev.tiedFromPrev && lastNoteEv) tiePairs.push([lastNoteEv, ev]);
+    lastNoteEv = ev;
+  }
+  for (const ev of events){
+    if (ev.type === 'note') drawNote(svg, ev);
+    else drawBar(svg, ev, ev.type === 'endbar');
+  }
+  drawBeams(svg, beamGroups);
+  drawTies(svg, tiePairs);
+}
+
+// 延音线弧线：连接相邻的两个同音高音符（已修正为向上“拱起来”）
+function drawTies(svg, pairs){
+  const {beamDrop, beamGap, dotDrop} = LAYOUT;
+  
+  // 用于计算上方需要避让的高度（高音点等）
+  const clearanceTop = n => {
+    const high = n.octave > 0 ? n.octave : 0;
+    let c = 12; // 基础避让高度
+    if (high > 0){
+      // 每个高音点增加 9 像素避让
+      c += high * 9; 
+    }
+    return c;
+  };
+
+  for (const [a, b] of pairs){
+    if (a.y !== b.y) continue; // 跨换行的延音线不绘制
+    const x1 = a.x + 20, x2 = b.x + 20;
+    
+    // 1. 弧线起止点的 y 坐标，位于音符上方
+    const yE = a.y - 30; 
+
+    // 2. 计算避让后的最高点 (像素 $y$ 值最小)
+    // $y$ 值越小越靠上
+    const apexTop = a.y - Math.max(clearanceTop(a), clearanceTop(b));
+
+    // 3. 计算控制点以实现“拱起来”（向上突起）
+    // 对于二次贝塞尔曲线，如果控制点 $ctrl < yE$（在起止点上方），
+    // 曲线就会向上拱起。
+    const ctrl = 1.7 * apexTop - yE;
+
+    const p = svgEl('path');
+    p.setAttribute('d', 'M ' + x1 + ' ' + yE + ' Q ' + ((x1 + x2) / 2) + ' ' + ctrl + ' ' + x2 + ' ' + yE);
+    p.setAttribute('class','tiedash');
+    svg.appendChild(p);
+  }
+}
+
+
+function drawBar(svg, ev, isEnd){
+  const x = ev.x + 5, y = ev.y;
+  const mk = (xx, cls) => {
+    const l = svgEl('line');
+    l.setAttribute('x1',xx); l.setAttribute('x2',xx);
+    l.setAttribute('y1', y-56); l.setAttribute('y2', y+50);
+    l.setAttribute('class', cls);
+    svg.appendChild(l);
+  };
+  if (isEnd){ mk(x,'bar'); mk(x+6,'bar thick'); }
+  else { mk(x,'bar'); }
+}
+
+function drawNote(svg, ev){
+  const x = ev.x, y = ev.y, cx = x + 20;
+  const g = svgEl('g');
+  g.setAttribute('class','note' + (ev.outOfRange ? ' oor' : ''));
+  ev.el = g;
+
+  // 播放高亮底框
+  const hl = svgEl('rect');
+  hl.setAttribute('x', x+1); hl.setAttribute('y', y-62);
+  hl.setAttribute('width', (1+ev.holdCount)*LAYOUT.cellW - 2);
+  hl.setAttribute('height', 118); hl.setAttribute('rx', 7);
+  hl.setAttribute('class','hlrect');
+  g.appendChild(hl);
+
+  // 顶部孔位标注
+  if (ev.digit !== 0){
+    const ann = svgEl('text');
+    ann.setAttribute('x', cx); ann.setAttribute('y', y-48);
+    ann.setAttribute('text-anchor','middle');
+    let cls = 'holeann';
+    if (ev.outOfRange) cls += ' oor';
+    else if (ev.holeMap && ev.holeMap.slide) cls += ' slide';
+    ann.setAttribute('class', cls);
+    ann.textContent = ev.annotation;
+    g.appendChild(ann);
+  }
+
+  // 延长记号（数字上方，弧线加圆点）
+  if (ev.fermata){
+    const f = svgEl('path');
+    f.setAttribute('d', 'M ' + (cx-8) + ' ' + (y-31) + ' Q ' + cx + ' ' + (y-45) + ' ' + (cx+8) + ' ' + (y-31));
+    f.setAttribute('class','fermata');
+    g.appendChild(f);
+    const fd = svgEl('circle');
+    fd.setAttribute('cx',cx); fd.setAttribute('cy', y-28); fd.setAttribute('r',2.3);
+    g.appendChild(fd);
+  }
+
+  // 高八度点（数字上方）
+  if (ev.octave > 0){
+    for (let k=0;k<ev.octave;k++){
+      const d = svgEl('circle');
+      d.setAttribute('cx',cx); d.setAttribute('cy', y-25-k*9); d.setAttribute('r',2.6);
+      g.appendChild(d);
+    }
+  }
+  // 低八度点（正规简谱：有时值线时点在下划线下方）
+  const lowDots = ev.octave < 0 ? -ev.octave : 0;
+  if (lowDots > 0){
+    const beams = ev.beamDepth || 0;
+    const firstDotY = beams > 0
+      ? y + LAYOUT.beamDrop + (beams-1)*LAYOUT.beamGap + LAYOUT.dotDrop
+      : y + 18;
+    for (let k=0;k<lowDots;k++){
+      const d = svgEl('circle');
+      d.setAttribute('cx',cx); d.setAttribute('cy', firstDotY + k*9); d.setAttribute('r',2.6);
+      g.appendChild(d);
+    }
+  }
+
+  // 变化音记号
+  if (ev.accidental !== 0){
+    const a = svgEl('text');
+    a.setAttribute('x', x+7); a.setAttribute('y', y);
+    a.setAttribute('class','acc');
+    a.textContent = ev.accidental === 1 ? '#' : 'b';
+    g.appendChild(a);
+  }
+
+  // 唱名数字
+  const dig = svgEl('text');
+  dig.setAttribute('x',cx); dig.setAttribute('y',y);
+  dig.setAttribute('text-anchor','middle'); dig.setAttribute('class','digit');
+  dig.textContent = ev.digit;
+  g.appendChild(dig);
+
+  // 附点
+  if (ev.dotted){
+    const d = svgEl('circle');
+    d.setAttribute('cx', x+36); d.setAttribute('cy', y-7); d.setAttribute('r',2.6);
+    g.appendChild(d);
+  }
+
+  // 延长线（破折号）
+  for (let h=0; h<ev.holdCount; h++){
+    const hx = x + (h+1)*LAYOUT.cellW;
+    const dash = svgEl('line');
+    dash.setAttribute('x1',hx+9); dash.setAttribute('x2',hx+34);
+    dash.setAttribute('y1',y-9); dash.setAttribute('y2',y-9);
+    dash.setAttribute('class','hold');
+    g.appendChild(dash);
+  }
+
+  svg.appendChild(g);
+}
+
+/* ===================== 信息面板 ===================== */
+function updateInfo(){
+  const info = document.getElementById('info');
+  const warn = document.getElementById('warnings');
+  const chips = [];
+
+  if (state.title){
+    chips.push('<span class="chip">标题：' + escapeHtml(state.title) + '</span>');
+  }
+  if (state.keyInfo){
+    const orig = state.keyInfo.original;
+    if (state.keyInfo.semitone === 0){
+      chips.push('<span class="chip good">原调 1=' + orig + ' 即 1=C，无需移调</span>');
+    } else {
+      chips.push('<span class="chip">原调 1=' + orig + ' → 1=C（乐谱已按实际音高直接转换）</span>');
+    }
+  } else {
+    chips.push('<span class="chip">1=C</span>');
+  }
+  if (state.timeSig) chips.push('<span class="chip">拍号 ' + state.timeSig + '</span>');
+
+  const noteCount = state.events.filter(e=>e.type==='note').length;
+  chips.push('<span class="chip">音符 ' + noteCount + ' 个</span>');
+  if (state.octaveShift !== 0){
+    chips.push('<span class="chip">八度移动 ' + (state.octaveShift>0?'+':'') + state.octaveShift + '</span>');
+  }
+  if (state.outOfRange > 0){
+    chips.push('<span class="chip warn">⚠ 有 ' + state.outOfRange + ' 个音符超出音域 C4–C7</span>');
+  } else if (noteCount > 0){
+    chips.push('<span class="chip good">所有音符均在音域内</span>');
+  }
+  info.innerHTML = chips.join('');
+
+  warn.innerHTML = state.warnings.length
+    ? state.warnings.map(w=>'⚠ '+escapeHtml(w)).join('<br>')
+    : '';
+}
+
+/* ===================== Web Audio 播放 ===================== */
+let audioCtx = null;
+const playback = {playing:false, raf:null, schedule:[], totalEnd:0, master:null};
+
+function ensureCtx(){
+  if (!audioCtx){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AC();
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function scheduleTone(freq, start, dur, dest){
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'triangle';
+  osc.frequency.value = freq;
+  const peak = 0.34;
+  const a = 0.015, r = 0.05;
+  const sustainUntil = Math.max(start + a, start + dur - r);
+  gain.gain.setValueAtTime(0, start);
+  gain.gain.linearRampToValueAtTime(peak, start + a);
+  gain.gain.setValueAtTime(peak, sustainUntil);
+  gain.gain.linearRampToValueAtTime(0, start + dur);
+  osc.connect(gain); gain.connect(dest);
+  osc.start(start); osc.stop(start + dur + 0.06);
+}
+
+function play(){
+  stop();
+  const ctx = ensureCtx();
+  const secPerBeat = 60 / state.bpm;
+  playback.master = ctx.createGain();
+  playback.master.gain.value = 0.9;
+  playback.master.connect(ctx.destination);
+
+  // 合并延音线：同音高相连的音符只发声一次，时值相加
+  const seq = [];
+  for (const ev of state.events){
+    if (ev.type !== 'note') continue;
+    const last = seq[seq.length - 1];
+    if (last && ev.tiedFromPrev && ev.midi !== null && last.midi === ev.midi && last.playable){
+      last.beats += noteBeats(ev);
+      last.evs.push(ev);
+    } else {
+      seq.push({midi: ev.midi, beats: noteBeats(ev), evs: [ev],
+                playable: ev.digit !== 0 && ev.midi !== null && !ev.outOfRange});
+    }
+  }
+
+  let t = ctx.currentTime + 0.12;
+  playback.schedule = [];
+  for (const item of seq){
+    const dur = item.beats * secPerBeat;
+    if (item.playable){
+      const freq = 440 * Math.pow(2, (item.midi - 69)/12);
+      scheduleTone(freq, t, dur, playback.master);
+    }
+    playback.schedule.push({evs: item.evs, start:t, end:t+dur});
+    t += dur;
+  }
+  playback.totalEnd = t;
+  playback.playing = true;
+  tick();
+}
+
+function tick(){
+  if (!playback.playing) return;
+  const now = audioCtx.currentTime;
+  const activeEls = new Set();
+  for (const s of playback.schedule){
+    if (now >= s.start && now < s.end){
+      for (const ev of s.evs){ if (ev.el) activeEls.add(ev.el); }
+      break;
+    }
+  }
+  for (const ev of state.events){
+    if (ev.el) ev.el.classList.toggle('playing', activeEls.has(ev.el));
+  }
+  if (now >= playback.totalEnd){ stop(); return; }
+  playback.raf = requestAnimationFrame(tick);
+}
+
+function stop(){
+  playback.playing = false;
+  if (playback.raf){ cancelAnimationFrame(playback.raf); playback.raf = null; }
+  if (playback.master && audioCtx){
+    try{
+      playback.master.gain.cancelScheduledValues(audioCtx.currentTime);
+      playback.master.gain.setValueAtTime(0, audioCtx.currentTime);
+      playback.master.disconnect();
+    }catch(e){}
+    playback.master = null;
+  }
+  for (const ev of state.events){
+    if (ev.el) ev.el.classList.remove('playing');
+  }
+}
+
+/* ===================== 乐谱导出（PNG / PDF / SVG） ===================== */
+const EXPORT_CSS =
+  'text{font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif}' +
+  '.digit{font-size:27px;font-weight:700;fill:#222}' +
+  '.acc{font-size:17px;font-weight:700;fill:#222}' +
+  '.holeann{font-size:13px;font-weight:600;fill:#1565c0}' +
+  '.holeann.slide{fill:#e65100}' +
+  '.holeann.oor{fill:#c62828}' +
+  '.keytext{font-size:21px;font-weight:700;fill:#222}' +
+  '.titletext{font-size:24px;font-weight:700;fill:#111}' +
+  'line{stroke:#37474f;stroke-width:2}' +
+  '.bar{stroke:#546e7a;stroke-width:1.6}' +
+  '.bar.thick{stroke-width:5}' +
+  '.hold{stroke:#37474f;stroke-width:2.4}' +
+  '.tiedash{fill:none;stroke:#37474f;stroke-width:1.8}' +
+  '.fermata{fill:none;stroke:#222;stroke-width:2}' +
+  'circle{fill:#222}' +
+  '.hlrect{display:none}';
+
+function prepareExportSvg(){
+  const svg = document.getElementById('score');
+  const vbAttr = svg.getAttribute('viewBox');
+  if (!vbAttr || !state.events.length) return null;
+  const parts = vbAttr.split(/\s+/).map(Number);
+  const w = parts[2], h = parts[3];
+  const clone = svg.cloneNode(true);
+  clone.querySelectorAll('.playing').forEach(el => el.classList.remove('playing'));
+  const bg = document.createElementNS(SVG_NS, 'rect');
+  bg.setAttribute('x',0); bg.setAttribute('y',0);
+  bg.setAttribute('width',w); bg.setAttribute('height',h);
+  bg.setAttribute('fill','#ffffff');
+  clone.insertBefore(bg, clone.firstChild);
+  const st = document.createElementNS(SVG_NS, 'style');
+  st.textContent = EXPORT_CSS;
+  clone.insertBefore(st, clone.firstChild);
+  clone.setAttribute('xmlns', SVG_NS);
+  clone.removeAttribute('id');
+  // 导出尺寸由调用方按当前缩放比例设置
+  return {clone, w, h};
+}
+
+function downloadBlob(blob, name){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 8000);
+}
+
+function exportName(ext){
+  const base = (state.title || '乐谱').replace(/[\\/:*?"<>|]/g, '_');
+  return base + '.' + ext;
+}
+
+function rasterize(){
+  return new Promise((resolve, reject) => {
+    const prep = prepareExportSvg();
+    if (!prep){ reject(new Error('no score')); return; }
+    // 按当前缩放后的显示尺寸导出；res 为高清渲染倍率（物理尺寸不变，仅提高清晰度）
+    const s = state.scale;
+    const dispW = prep.w * s, dispH = prep.h * s;
+    const res = Math.min(2, 16000 / Math.max(dispW, dispH, 1));
+    const pxW = Math.max(1, Math.round(dispW * res));
+    const pxH = Math.max(1, Math.round(dispH * res));
+    prep.clone.setAttribute('width', pxW);
+    prep.clone.setAttribute('height', pxH);
+    const xml = new XMLSerializer().serializeToString(prep.clone);
+    const url = URL.createObjectURL(new Blob([xml], {type:'image/svg+xml;charset=utf-8'}));
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = pxW;
+      canvas.height = pxH;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve({canvas, w: dispW, h: dispH});
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('rasterize failed')); };
+    img.src = url;
+  });
+}
+
+function exportSVG(){
+  const prep = prepareExportSvg();
+  if (!prep){ alert('当前没有可导出的乐谱'); return; }
+  // 按当前缩放后的显示尺寸导出
+  const s = state.scale;
+  prep.clone.setAttribute('width', Math.round(prep.w * s * 100) / 100);
+  prep.clone.setAttribute('height', Math.round(prep.h * s * 100) / 100);
+  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(prep.clone);
+  downloadBlob(new Blob([xml], {type:'image/svg+xml;charset=utf-8'}), exportName('svg'));
+}
+
+async function exportPNG(){
+  try {
+    const {canvas} = await rasterize();
+    canvas.toBlob(b => { if (b) downloadBlob(b, exportName('png')); }, 'image/png');
+  } catch(e){ alert('导出失败：当前没有可导出的乐谱'); }
+}
+
+// 极简 PDF 生成器：把画布 JPEG 嵌入单页 PDF（无外部依赖）
+function buildPdf(jpegBytes, wPx, hPx, wPt, hPt){
+  const chunks = [];
+  const offsets = [];
+  let pos = 0;
+  const ws = s => { const b = new TextEncoder().encode(s); chunks.push(b); pos += b.length; };
+  const wb = b => { chunks.push(b); pos += b.length; };
+  ws('%PDF-1.3\n');
+  offsets[1] = pos;
+  ws('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+  offsets[2] = pos;
+  ws('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+  offsets[3] = pos;
+  ws('3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + wPt.toFixed(2) + ' ' + hPt.toFixed(2) +
+     '] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n');
+  offsets[4] = pos;
+  ws('4 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + wPx + ' /Height ' + hPx +
+     ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpegBytes.length + ' >>\nstream\n');
+  wb(jpegBytes);
+  ws('\nendstream\nendobj\n');
+  offsets[5] = pos;
+  const content = 'q\n' + wPt.toFixed(2) + ' 0 0 ' + hPt.toFixed(2) + ' 0 0 cm\n/Im0 Do\nQ\n';
+  ws('5 0 obj\n<< /Length ' + content.length + ' >>\nstream\n' + content + 'endstream\nendobj\n');
+  const xrefPos = pos;
+  let xref = 'xref\n0 6\n0000000000 65535 f \n';
+  for (let i = 1; i <= 5; i++) xref += String(offsets[i]).padStart(10,'0') + ' 00000 n \n';
+  ws(xref);
+  ws('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n' + xrefPos + '\n%%EOF');
+  let total = 0;
+  for (const c of chunks) total += c.length;
+  const out = new Uint8Array(total);
+  let p = 0;
+  for (const c of chunks){ out.set(c, p); p += c.length; }
+  return out;
+}
+
+async function exportPDF(){
+  try {
+    const {canvas, w, h} = await rasterize();
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+    const jpegBytes = Uint8Array.from(atob(dataUrl.split(',')[1]), c => c.charCodeAt(0));
+    const pdf = buildPdf(jpegBytes, canvas.width, canvas.height, w * 0.75, h * 0.75);
+    downloadBlob(new Blob([pdf], {type:'application/pdf'}), exportName('pdf'));
+  } catch(e){ alert('导出失败：当前没有可导出的乐谱'); }
+}
+
+/* ===================== 音位参考表 ===================== */
+function buildReference(){
+  let html = '<table><thead><tr><th>孔位</th><th>吹</th><th>吹 ●</th><th>吸</th><th>吸 ●</th></tr></thead><tbody>';
+  for (let h=0; h<12; h++){
+    html += '<tr><td>' + (h+1) + '</td>'
+      + '<td>' + midiToName(BLOW_MIDI[h]) + '</td>'
+      + '<td>' + midiToName(BLOW_MIDI[h]+1) + '</td>'
+      + '<td>' + midiToName(DRAW_MIDI[h]) + '</td>'
+      + '<td>' + midiToName(DRAW_MIDI[h]+1) + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('reference').innerHTML = html;
+}
+
+/* ===================== 示例 ===================== */
+const SAMPLES = {
+  star:
+`《小星星》
+1=C 2/4
+1 1 5 5 | 6 6 5 - | 4 4 3 3 | 2 2 1 - |
+5 5 4 4 | 3 3 2 - | 5 5 4 4 | 3 3 2 - |
+1 1 5 5 | 6 6 5 - | 4 4 3 3 | 2 2 1 - ||`,
+  scale:
+`《音阶练习》
+1=C 4/4
+1 2 3 4 | 5 6 7 1' | 1' 7 6 5 | 4 3 2 1 ||`,
+  chromatic:
+`《半音练习》
+1=C 4/4
+1 #1 2 #2 | 3 4 #4 5 | #5 6 #6 7 | 1' - - - * ||`,
+  sustain:
+`《延音示例》
+1=C 4/4
+1 2 3 ~ 3 | 5 ~ 5 - 0 | 6 1' 5* 0 | 3 - - - * ||`
+};
+
+/* ===================== 主流程与事件绑定 ===================== */
+function processInput(){
+  stop();
+  const text = document.getElementById('input').value;
+  const parsed = parse(text);
+  transposeToC(parsed.events, parsed.keyInfo);
+  state.events = parsed.events;
+  state.keyInfo = parsed.keyInfo;
+  state.timeSig = parsed.timeSig;
+  state.title = parsed.title;
+  state.warnings = parsed.warnings;
+  prepare();
+  render();
+  updateInfo();
+}
+
+function rerender(){
+  stop();
+  prepare();
+  render();
+  updateInfo();
+}
+
+function init(){
+  const input = document.getElementById('input');
+  input.value = SAMPLES.star;
+
+  let debounceTimer = null;
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(processInput, 450);
+  });
+
+  document.getElementById('renderBtn').addEventListener('click', processInput);
+  document.getElementById('playBtn').addEventListener('click', play);
+  document.getElementById('stopBtn').addEventListener('click', stop);
+  document.getElementById('octaveUp').addEventListener('click', () => { state.octaveShift++; rerender(); });
+  document.getElementById('octaveDown').addEventListener('click', () => { state.octaveShift--; rerender(); });
+  document.getElementById('exportPng').addEventListener('click', exportPNG);
+  document.getElementById('exportPdf').addEventListener('click', exportPDF);
+  document.getElementById('exportSvg').addEventListener('click', exportSVG);
+
+  // 乐谱大小缩放：改变比例后自动重新排列（缩小时每行容纳更多音符）
+  const zoom = document.getElementById('zoom');
+  const zoomVal = document.getElementById('zoomVal');
+  const applyZoom = () => {
+    state.scale = parseInt(zoom.value, 10) / 100;
+    zoomVal.textContent = zoom.value + '%';
+    render();
+  };
+  zoom.addEventListener('input', applyZoom);
+  document.getElementById('zoomIn').addEventListener('click', () => {
+    zoom.value = Math.min(160, parseInt(zoom.value, 10) + 5); applyZoom();
+  });
+  document.getElementById('zoomOut').addEventListener('click', () => {
+    zoom.value = Math.max(50, parseInt(zoom.value, 10) - 5); applyZoom();
+  });
+  document.getElementById('zoomReset').addEventListener('click', () => {
+    zoom.value = Math.round(DEFAULT_SCALE * 100); applyZoom();
+  });
+
+  // 窗口尺寸变化时按新的可用宽度自动重新排列
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { if (state.events.length) render(); }, 150);
+  });
+
+  const tempo = document.getElementById('tempo');
+  const tempoVal = document.getElementById('tempoVal');
+  tempo.addEventListener('input', () => {
+    state.bpm = parseInt(tempo.value,10);
+    tempoVal.textContent = state.bpm + ' BPM';
+  });
+
+  document.getElementById('samples').addEventListener('change', (e) => {
+    const key = e.target.value;
+    if (key && SAMPLES[key]){
+      input.value = SAMPLES[key];
+      state.octaveShift = 0;
+      processInput();
+    }
+    e.target.value = '';
+  });
+
+  buildReference();
+  processInput();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+</body>
+</html>
