@@ -713,7 +713,7 @@ function drawNote(svg, ev){
   // 变化音记号
   if (ev.accidental !== 0){
     const a = svgEl('text');
-    a.setAttribute('x', x+7); a.setAttribute('y', y);
+    a.setAttribute('x', x+4); a.setAttribute('y', y-8);
     a.setAttribute('class','acc');
     a.textContent = ev.accidental === 1 ? '#' : 'b';
     g.appendChild(a);
@@ -1096,7 +1096,7 @@ function rerender(){
 
 function init(){
   const input = document.getElementById('input');
-  input.value = SAMPLES.star;
+  input.value = SAMPLES.chromatic;
 
   let debounceTimer = null;
   input.addEventListener('input', () => {
