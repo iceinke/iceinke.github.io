@@ -19,23 +19,36 @@
   <meta name="author" content="Feng Zhu">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://iceinke.github.io/tags/index.html">
+    <meta name="description" content="A collection of ebooks available for download.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ebooks">
+<meta property="og:url" content="http://iceinke.github.io/ebookdownload/en/index.html">
 <meta property="og:site_name" content="Feng Zhu&#39;s Blog">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:description" content="A collection of ebooks available for download.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://iceinke.github.io/img/post6.jpg">
+<meta property="article:published_time" content="2026-09-18T16:16:22.354Z">
+<meta property="article:modified_time" content="2026-09-18T16:16:54.685Z">
 <meta property="article:author" content="Feng Zhu">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://iceinke.github.io/img/post6.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>标签 - Feng Zhu&#39;s Blog</title>
+  <title>Ebooks - Feng Zhu&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -89,7 +102,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 80vh;">
+<div class="header-inner" style="height: 30vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -115,7 +128,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="首页" data-en-text="Home">首页</span>
+                <span class="navbar-menu-text" data-zh-text="首页" data-en-text="Home">Home</span>
               </a>
             </li>
           
@@ -127,7 +140,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/link/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="链接" data-en-text="Links">链接</span>
+                <span class="navbar-menu-text" data-zh-text="链接" data-en-text="Links">Links</span>
               </a>
             </li>
           
@@ -197,7 +210,7 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-user-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="关于" data-en-text="About">关于</span>
+                <span class="navbar-menu-text" data-zh-text="关于" data-en-text="About">About</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- 
@@ -250,6 +263,15 @@
           
         
         
+          
+          <li class="nav-item navbar-language-item">
+            <a class="navbar-language-switcher is-english" href="/ebookdownload/" aria-label="Switch language">
+              
+                <span class="navbar-language-chinese">中文</span><span class="navbar-language-english is-active">English</span>
+              
+            </a>
+          </li>
+        
         <script>
           (function () {
             function updateNavbarLanguage(language) {
@@ -258,7 +280,7 @@
               });
             }
             document.addEventListener('DOMContentLoaded', function () {
-              var pageLanguage = '';
+              var pageLanguage = 'en';
               var language = pageLanguage || window.localStorage.getItem('home-language') || 'zh';
               updateNavbarLanguage(language);
             });
@@ -285,17 +307,39 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">标签</span>
+            <span id="subtitle">Ebooks</span>
           
         </div>
 
         
-      </div>
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
 
       
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
+    
+  </div>
+
+
+        
+      </div>
+
       
     </div>
   </div>
@@ -307,24 +351,201 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/C/" style="font-size: 22.5px; color: #d18b6f">C++</a> <a href="/tags/linux/" style="font-size: 30px; color: #bd5d3a">linux</a> <a href="/tags/multilep/" style="font-size: 15px; color: #e5b8a3">multilep</a>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Ebooks</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    Last updated on September 19, 2026
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <style>
+  .ebook-cover {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ebook-cover:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ebook-container {
+    display: inline-block;
+    vertical-align: top;  /* 让所有容器从顶部对齐 */
+    text-align: center;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 200px;
+  }
+  
+  .ebook-title {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    word-wrap: break-word;
+    max-width: 200px;
+    text-align: center;
+    min-height: 40px; /* 固定最小高度，确保至少容纳两行文字 */
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start; /* 书名从顶部开始显示 */
+    justify-content: center;
+  }
+</style>
+
+<div id="ebook-list"></div>
+
+<script>
+  const ebooks = {
+    "new_Instruction_for_CERN_account": "New Instruction for CERN Account",
+    "鸟哥的Linux私房菜基础学习篇第四版": "鸟哥的Linux私房菜基础学习篇·第四版",
+    "Introductiontoelementaryparticles": "Introduction to Elementary Particles",
+    "Statistical_Methods_in_Experimental_Physics": "Statistical Methods in Experimental Physics",
+    "实验物理中的概率和统计_朱永生著": "实验物理中的概率和统计 朱永生著",
+    "北京谱仪正负电子物理": "北京谱仪正负电子物理 郑志鹏,朱永生主编",
+    "量子场论导论I": "量子场论导论partI Michael Peskin",
+    "量子场论导论II": "量子场论导论partII Michael Peskin",
+    "量子场论导论III": "量子场论导论partIII Michael Peskin",
+    "量子场论导论note": "量子场论导论note"
+    
+
+    //"高能物理数据分析": "高能物理数据分析 统计方法使用指南 O·贝恩克 K·克朗格宁 G·肖特 T·肖纳-赛德涅斯 -  (2019, 中国科学技术大学出版社)"
+    //pdf/封面文件名:书名（用于显示的名称）
+    //要求电子书的pdf文件名/Users/a123123/myblogdir/Hexo-Blog/themes/fluid/source/download和封面的png/Users/a123123/myblogdir/Hexo-Blog/themes/fluid/source/postfigure/ebook文件名一致
+  };
+
+
+  const ebookList = document.getElementById('ebook-list');
+
+  for (const [fileName, displayName] of Object.entries(ebooks)) {
+    const ebookContainer = document.createElement('div');
+    ebookContainer.className = 'ebook-container';
+
+    const ebookLink = document.createElement('a');
+    ebookLink.href = `/download/${fileName}.pdf`;
+    
+    const ebookImage = document.createElement('img');
+    ebookImage.className = 'ebook-cover';
+    ebookImage.src = `/postfigure/ebook/${fileName}.jpg`;
+    ebookImage.alt = displayName;
+    ebookImage.width = 200;
+    ebookImage.height = 300;
+    
+    const ebookTitle = document.createElement('span');
+    ebookTitle.className = 'ebook-title';
+    ebookTitle.textContent = displayName;
+    
+    ebookLink.appendChild(ebookImage);
+    ebookContainer.appendChild(ebookLink);
+    ebookContainer.appendChild(ebookTitle);
+    ebookList.appendChild(ebookContainer);
+  }
+</script>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
+      
+    </div>
+  
 </div>
 
-              </div>
+
+              
+
+              
             </div>
-          </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -339,7 +560,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -347,7 +568,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -404,7 +625,145 @@
 
 
 
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
@@ -418,7 +777,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
   </noscript>
 </body>
 </html>

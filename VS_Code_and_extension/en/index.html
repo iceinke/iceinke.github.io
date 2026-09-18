@@ -19,16 +19,16 @@
   <meta name="author" content="Feng Zhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这篇笔记是介绍Visual Studio Code的用法和插件的使用，特别是ssh插件。">
+    <meta name="description" content="A practical note on using Visual Studio Code and its extensions, especially the SSH extension.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VS Code and Extension">
-<meta property="og:url" content="http://iceinke.github.io/VS_Code_and_extension/index.html">
+<meta property="og:title" content="VS Code and Extensions">
+<meta property="og:url" content="http://iceinke.github.io/VS_Code_and_extension/en/index.html">
 <meta property="og:site_name" content="Feng Zhu&#39;s Blog">
-<meta property="og:description" content="这篇笔记是介绍Visual Studio Code的用法和插件的使用，特别是ssh插件。">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:description" content="A practical note on using Visual Studio Code and its extensions, especially the SSH extension.">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://iceinke.github.io/img/post12.jpg">
-<meta property="article:published_time" content="2024-10-15T12:41:07.032Z">
-<meta property="article:modified_time" content="2026-09-18T16:16:01.731Z">
+<meta property="article:published_time" content="2026-09-18T16:16:22.281Z">
+<meta property="article:modified_time" content="2026-09-18T16:16:54.613Z">
 <meta property="article:author" content="Feng Zhu">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +38,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>VS Code and Extension - Feng Zhu&#39;s Blog</title>
+  <title>VS Code and Extensions - Feng Zhu&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -128,7 +128,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="首页" data-en-text="Home">首页</span>
+                <span class="navbar-menu-text" data-zh-text="首页" data-en-text="Home">Home</span>
               </a>
             </li>
           
@@ -140,7 +140,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/link/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="链接" data-en-text="Links">链接</span>
+                <span class="navbar-menu-text" data-zh-text="链接" data-en-text="Links">Links</span>
               </a>
             </li>
           
@@ -210,7 +210,7 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-user-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="关于" data-en-text="About">关于</span>
+                <span class="navbar-menu-text" data-zh-text="关于" data-en-text="About">About</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- 
@@ -265,9 +265,9 @@
         
           
           <li class="nav-item navbar-language-item">
-            <a class="navbar-language-switcher " href="/VS_Code_and_extension/en/" aria-label="Switch language">
+            <a class="navbar-language-switcher is-english" href="/VS_Code_and_extension/" aria-label="Switch language">
               
-                <span class="navbar-language-chinese is-active">中文</span><span class="navbar-language-english">English</span>
+                <span class="navbar-language-chinese">中文</span><span class="navbar-language-english is-active">English</span>
               
             </a>
           </li>
@@ -280,7 +280,7 @@
               });
             }
             document.addEventListener('DOMContentLoaded', function () {
-              var pageLanguage = 'zh';
+              var pageLanguage = 'en';
               var language = pageLanguage || window.localStorage.getItem('home-language') || 'zh';
               updateNavbarLanguage(language);
             });
@@ -307,7 +307,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">VS Code and Extension</span>
+            <span id="subtitle">VS Code and Extensions</span>
           
         </div>
 
@@ -364,12 +364,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">VS Code and Extension</h1>
+            <h1 id="seo-header">VS Code and Extensions</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年9月19日
+                    Last updated on September 19, 2026
                   
                 
               </p>
@@ -379,13 +379,13 @@
                 
                 <link rel="stylesheet" href="/css/downloadbutton.css">
 
-<p><a href="/download/VS_Code_and_extension.pdf" class="download-button">下载文章</a></p>
+<p><a href="/download/VS_Code_and_extension.pdf" class="download-button">Download the article</a></p>
 <h2 id="MobaXterm"><a href="#MobaXterm" class="headerlink" title="MobaXterm"></a>MobaXterm</h2><p>如果你使用的是window系统，自带的cmd终端可能不支持图像传输和显示，你需要下面这个软件或者使用vscode</p>
 <p>MobaXterm程序，这个结合了ssh和x server，是个很方便的应用（甚至有图形化的界面），功能很强大，现只说明如何显示出集群上的图</p>
 <ul>
 <li><p>下载MobaXterm，<br><a target="_blank" rel="noopener" href="https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip">https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip</a><br>点击上面的链接，即可下载，按照提示进行安装</p>
 </li>
-<li><p>登录nnu集群<br>双击进入MobaXterm程序，点击star local terminal，你可以试试ssh -XY <a href="mailto:&#x7a;&#104;&#117;&#102;&#x65;&#110;&#x67;&#64;&#50;&#50;&#50;&#x2e;&#x31;&#x39;&#50;&#46;&#x37;&#x2e;&#x35;&#x31;">&#x7a;&#104;&#117;&#102;&#x65;&#110;&#x67;&#64;&#50;&#50;&#50;&#x2e;&#x31;&#x39;&#50;&#46;&#x37;&#x2e;&#x35;&#x31;</a>能不能直接登录，按理来说也许能登上去，如果登不上去，可以通过修改.ssh&#x2F;config 。</p>
+<li><p>登录nnu集群<br>双击进入MobaXterm程序，点击star local terminal，你可以试试ssh -XY <a href="mailto:&#x7a;&#x68;&#x75;&#102;&#x65;&#x6e;&#x67;&#64;&#x32;&#50;&#x32;&#x2e;&#x31;&#57;&#x32;&#46;&#55;&#46;&#x35;&#49;">&#x7a;&#x68;&#x75;&#102;&#x65;&#x6e;&#x67;&#64;&#x32;&#50;&#x32;&#x2e;&#x31;&#57;&#x32;&#46;&#55;&#46;&#x35;&#49;</a>能不能直接登录，按理来说也许能登上去，如果登不上去，可以通过修改.ssh&#x2F;config 。</p>
 </li>
 <li><p>修改ssh配置文件<br>你可能会发现当前路径下没有.ssh&#x2F;这个文件夹，你可以用下面的命令创建一个<br>mkdir .ssh<br>vi .ssh&#x2F;config    创建并修改config文件，输入下面几行</p>
 </li>
@@ -394,7 +394,7 @@
 
 
 <ul>
-<li>再次ssh -XY <a href="mailto:&#122;&#x68;&#x75;&#102;&#x65;&#110;&#103;&#64;&#x32;&#x32;&#50;&#46;&#49;&#57;&#50;&#x2e;&#x37;&#46;&#53;&#49;">&#122;&#x68;&#x75;&#102;&#x65;&#110;&#103;&#64;&#x32;&#x32;&#50;&#46;&#49;&#57;&#50;&#x2e;&#x37;&#46;&#53;&#49;</a> 登录应该就能看到你的文件了，进行课上测试使用 graph-&gt;Draw() 时就能看到图啦！（这个应用甚至在下次能不用你输入密码自动登录）</li>
+<li>再次ssh -XY <a href="mailto:&#122;&#x68;&#x75;&#x66;&#x65;&#x6e;&#103;&#64;&#50;&#x32;&#50;&#x2e;&#x31;&#57;&#50;&#x2e;&#55;&#x2e;&#x35;&#49;">&#122;&#x68;&#x75;&#x66;&#x65;&#x6e;&#103;&#64;&#50;&#x32;&#50;&#x2e;&#x31;&#57;&#50;&#x2e;&#55;&#x2e;&#x35;&#49;</a> 登录应该就能看到你的文件了，进行课上测试使用 graph-&gt;Draw() 时就能看到图啦！（这个应用甚至在下次能不用你输入密码自动登录）</li>
 </ul>
 <h2 id="X-server-for-Mac"><a href="#X-server-for-Mac" class="headerlink" title="X-server for Mac"></a>X-server for Mac</h2><p>首先下载xquartz，mac用这个链接<a target="_blank" rel="noopener" href="https://www.xquartz.org/releases/XQuartz-2.8.5.html">https://www.xquartz.org/releases/XQuartz-2.8.5.html</a> 下载并安装，打开xquartz应用，在自己的终端上用这个命令，你可以把这个命令放在<code>.bashrc</code>中而不用每次都需要使用这个命令<br><code>export DISPLAY=:0</code><br>之后用这个命令登录集群就能看图了（-XY 就是启用x服务器转发）<br><code>ssh -XY uername@server</code></p>
 <h2 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h2><p>下载<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">vscode</a>，打开之后请调至dark模式，because light attracts bugs.<br>如果你英文苦手，请在扩展中搜索简体中文，安装重启之后就能显示中文了。当你使用特定的编程语言的时候，右下角会弹出窗口让你安装对应的插件，以方便你的阅读，当然你也可以直接搜索，比如C++去获取插件。</p>
@@ -503,29 +503,6 @@
               
 
               
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/roofit_manual/" title="roofit manual">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">roofit manual</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/root-first-step/" title="First Step of Linux and Root">
-                        <span class="hidden-mobile">First Step of Linux and Root</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
 
             
@@ -540,7 +517,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>目录</span>
+    <span>Table of Contents</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -602,7 +579,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -610,7 +587,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -819,7 +796,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
   </noscript>
 </body>
 </html>
