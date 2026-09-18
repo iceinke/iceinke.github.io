@@ -248,6 +248,46 @@
           
         
         
+          <li class="nav-item navbar-language-item">
+            <button id="home-language-switcher" class="navbar-language-switcher" type="button" aria-label="Switch homepage language" aria-pressed="false">
+              <span class="navbar-language-chinese">中文</span><span class="navbar-language-english">English</span>
+            </button>
+          </li>
+          <script>
+            (function () {
+              function updateHomeLanguage(language) {
+                document.querySelectorAll('.language-post-pair').forEach(function (pair) {
+                  var cards = pair.querySelectorAll('.language-post-card');
+                  var selected = pair.querySelector('[data-post-language="' + language + '"]') || pair.querySelector('[data-post-language="zh"]');
+                  cards.forEach(function (card) {
+                    card.style.display = card === selected ? 'flex' : 'none';
+                  });
+                });
+                var switcher = document.getElementById('home-language-switcher');
+                if (switcher) {
+                  switcher.classList.toggle('is-english', language === 'en');
+                  switcher.querySelector('.navbar-language-chinese').classList.toggle('is-active', language !== 'en');
+                  switcher.querySelector('.navbar-language-english').classList.toggle('is-active', language === 'en');
+                  switcher.setAttribute('aria-pressed', language === 'en' ? 'true' : 'false');
+                }
+              }
+              document.addEventListener('DOMContentLoaded', function () {
+                var language = window.localStorage.getItem('home-language') || 'zh';
+                updateHomeLanguage(language);
+                var switcher = document.getElementById('home-language-switcher');
+                if (switcher) {
+                  switcher.addEventListener('click', function () {
+                    var nextLanguage = language === 'en' ? 'zh' : 'en';
+                    language = nextLanguage;
+                    window.localStorage.setItem('home-language', language);
+                    updateHomeLanguage(language);
+                  });
+                }
+              });
+            })();
+          </script>
+        
+        
           <li class="nav-item" id="color-toggle-btn">
             <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
               <i class="iconfont icon-dark" id="color-toggle-icon"></i>
@@ -296,11 +336,15 @@
                 
 
 
-  <div class="row mx-auto index-card">
+
+  
+  <div class="language-post-pair">
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="zh">
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/rootfirststep/" target="_self">
+        <a href="/root-first-step/" target="_self">
           <img src="/img/post8.jpg" srcset="/img/loading.gif" lazyload alt="First Step of Linux and Root">
         </a>
       </div>
@@ -310,13 +354,13 @@
         
           <i class="index-pin iconfont icon-top" title="Pin on top"></i>
         
-        <a href="/rootfirststep/" target="_self">
+        <a href="/root-first-step/" target="_self">
           First Step of Linux and Root
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/rootfirststep/" target="_self">
+      <a class="index-excerpt " href="/root-first-step/" target="_self">
         <div>
           作为一个新手，你需要学习基础的Linux命令，在熟悉这些命令之后，尝试用cern root做一些简单的拟合。
         </div>
@@ -343,12 +387,65 @@
       </div>
     </article>
   </div>
-
-  <div class="row mx-auto index-card">
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="en">
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/linux/" target="_self">
+        <a href="/root-first-step/en/" target="_self">
+          <img src="/img/post8.jpg" srcset="/img/loading.gif" lazyload alt="First Step of Linux and ROOT">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+          <i class="index-pin iconfont icon-top" title="Pin on top"></i>
+        
+        <a href="/root-first-step/en/" target="_self">
+          First Step of Linux and ROOT
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/root-first-step/en/" target="_self">
+        <div>
+          A beginner-friendly introduction to essential Linux commands and simple fitting exercises with CERN ROOT and RooFit.
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-18 19:58" pubdate>
+              2026-09-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/linux/">#linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+    
+  </div>
+
+  
+  <div class="language-post-pair">
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="zh">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/linux-learning-note/" target="_self">
           <img src="/img/post4.jpg" srcset="/img/loading.gif" lazyload alt="Linux learning note">
         </a>
       </div>
@@ -358,13 +455,13 @@
         
           <i class="index-pin iconfont icon-top" title="Pin on top"></i>
         
-        <a href="/linux/" target="_self">
+        <a href="/linux-learning-note/" target="_self">
           Linux learning note
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/linux/" target="_self">
+      <a class="index-excerpt " href="/linux-learning-note/" target="_self">
         <div>
           当你经过第一阶段的入门练习之后，想必你一定非常想多了解一点Linux这个神秘的系统！这篇笔记将会是你的进阶之路！
         </div>
@@ -391,8 +488,61 @@
       </div>
     </article>
   </div>
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="en">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/linux-learning-note/en/" target="_self">
+          <img src="/img/post4.jpg" srcset="/img/loading.gif" lazyload alt="Linux Learning Note">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+          <i class="index-pin iconfont icon-top" title="Pin on top"></i>
+        
+        <a href="/linux-learning-note/en/" target="_self">
+          Linux Learning Note
+        </a>
+      </h2>
 
-  <div class="row mx-auto index-card">
+      
+      <a class="index-excerpt " href="/linux-learning-note/en/" target="_self">
+        <div>
+          An intermediate Linux learning note covering commands, data management, environment variables, shell scripts, and structured commands.
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-18 20:22" pubdate>
+              2026-09-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/linux/">#linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+    
+  </div>
+
+  
+  <div class="language-post-pair">
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="zh">
     
     
       <div class="col-12 col-md-4 m-auto index-img">
@@ -437,8 +587,13 @@
       </div>
     </article>
   </div>
+    
+  </div>
 
-  <div class="row mx-auto index-card">
+  
+  <div class="language-post-pair">
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="zh">
     
     
       <div class="col-12 col-md-4 m-auto index-img">
@@ -483,8 +638,13 @@
       </div>
     </article>
   </div>
+    
+  </div>
 
-  <div class="row mx-auto index-card">
+  
+  <div class="language-post-pair">
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="zh">
     
     
       <div class="col-12 col-md-4 m-auto index-img">
@@ -529,12 +689,17 @@
       </div>
     </article>
   </div>
+    
+  </div>
 
-  <div class="row mx-auto index-card">
+  
+  <div class="language-post-pair">
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="zh">
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/multilepnote/" target="_self">
+        <a href="/multilep-learning-note/" target="_self">
           <img src="/img/post9.jpg" srcset="/img/loading.gif" lazyload alt="🔒 Multilep learning note">
         </a>
       </div>
@@ -542,13 +707,13 @@
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/multilepnote/" target="_self">
+        <a href="/multilep-learning-note/" target="_self">
           🔒 Multilep learning note
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/multilepnote/" target="_self">
+      <a class="index-excerpt " href="/multilep-learning-note/" target="_self">
         <div>
           本文涉及较为深入的高能物理的代码解析和理论知识。
         </div>
@@ -577,9 +742,56 @@
       </div>
     </article>
   </div>
+    
+  <div class="row mx-auto index-card language-post-card" data-post-language="en">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/multilep-learning-note/en/" target="_self">
+          <img src="/img/post9.jpg" srcset="/img/loading.gif" lazyload alt="🔒 Multilep Learning Note">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/multilep-learning-note/en/" target="_self">
+          🔒 Multilep Learning Note
+        </a>
+      </h2>
 
+      
+      <a class="index-excerpt " href="/multilep-learning-note/en/" target="_self">
+        <div>
+          A detailed note on high-energy physics code, analysis logic, and the related theoretical concepts.
+        </div>
+      </a>
 
-
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-18 20:43" pubdate>
+              2026-09-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/multilep/">#multilep</a>
+            
+              <a href="/tags/C/">#C++</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+    
+  </div>
 
 
               </div>

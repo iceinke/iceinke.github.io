@@ -1,0 +1,1079 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Z001.ico">
+  <link rel="icon" href="/img/Z001.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#1F1E1D">
+  <meta name="author" content="Feng Zhu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="An intermediate Linux learning note covering commands, data management, environment variables, shell scripts, and structured commands.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Learning Note">
+<meta property="og:url" content="http://iceinke.github.io/linux-learning-note/en/index.html">
+<meta property="og:site_name" content="Feng Zhu&#39;s Blog">
+<meta property="og:description" content="An intermediate Linux learning note covering commands, data management, environment variables, shell scripts, and structured commands.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://iceinke.github.io/img/post4.jpg">
+<meta property="article:published_time" content="2026-09-18T12:22:51.590Z">
+<meta property="article:modified_time" content="2026-09-18T12:46:20.520Z">
+<meta property="article:author" content="Feng Zhu">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://iceinke.github.io/img/post4.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Linux Learning Note - Feng Zhu&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/claude.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"iceinke.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":250,"cursorChar":" ","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#D97757","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 30vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Feng</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/link/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-music"></i>
+                <span>Music</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- 
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/sheet/" target="_self">
+                    <i class="iconfont icon-note"></i>
+                    <span>乐谱</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/sheet/transpose/" target="_self">
+                    <i class="iconfont icon-pencil"></i>
+                    <span>移调工具</span>
+                  </a>
+                 -->
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item " 
+                    href="/sheet/"
+                    target="_self">
+                    <i class="iconfont icon-note"></i>
+                    <span>乐谱</span>
+                    
+                  </a>
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item " 
+                    href="/sheet/transpose/"
+                    target="_self">
+                    <i class="iconfont icon-pencil"></i>
+                    <span>移调工具</span>
+                    
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- 
+                  
+                  
+                  
+                  <a class="dropdown-item" href="https://space.bilibili.com/130228752" target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>bilibili</span>
+                  </a>
+                
+                   -->
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item " 
+                    href="https://space.bilibili.com/130228752"
+                    target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>bilibili</span>
+                    
+                  </a>
+                
+                  
+                  
+                  
+                  
+                  <a class="dropdown-item qr-trigger" 
+                    
+                    target="_self">
+                    <i class="iconfont icon-wechat-fill"></i>
+                    <span>wechat</span>
+                    
+                      <img class="qr-img" src="/img/wechat.png" srcset="/img/loading.gif" lazyload alt="qrcode" />
+                    
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          
+          <li class="nav-item navbar-language-item">
+            <a class="navbar-language-switcher is-english" href="/linux-learning-note/" aria-label="Switch language">
+              
+                <span class="navbar-language-chinese">中文</span><span class="navbar-language-english is-active">English</span>
+              
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post3.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">Linux Learning Note</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux Learning Note</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    Last updated on September 18, 2026
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <link rel="stylesheet" href="/css/downloadbutton.css">
+
+<p><a href="/download/linux-en.pdf" class="download-button">Download the article</a></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-file-content-manage.html">Linux | Runoob tutorial (runoob.com)</a> is recommended as a starting point<br><a href="/download/鸟哥的Linux私房菜基础学习篇第四版.pdf" class="download-button">Linux Cookbook</a></p>
+</blockquote>
+<h1 id="linux-basics"><a href="#linux-basics" class="headerlink" title="linux basics"></a>linux basics</h1><h2 id="1-Basic-operations"><a href="#1-Basic-operations" class="headerlink" title="1. Basic operations"></a>1. Basic operations</h2><h3 id="1-ls-list"><a href="#1-ls-list" class="headerlink" title="1 ls list"></a>1 <strong>ls</strong> list</h3><p><code>command [-options] parameter ...</code><br>Options are usually given with a ‘-‘ sign, -h, and sometimes ‘–’ is used to use the full name, –help</p>
+<p><code>ls -l</code> Display detailed information<br><code>ls -a</code> Show hidden files<br><code>ls -R</code> displays subdirectory files<br><code>ls -F</code> displays file type<br>The -F option adds a forward slash (&#x2F;) after the directory name to make it easier for users to distinguish in the output. Similarly, it also adds an asterisk (*) after an executable file (such as the my_script file above) to help users find out which files can be run on the system<br><code>ls -i</code> displays the file inode encoding</p>
+<p><strong>Wildcard</strong></p>
+<p><code>ls -l t?st</code> replaces a character<br><code>ls -l t*st</code> replaces multiple characters<br><code>ls -l t[abc]st</code> Replace with abc<br><code>ls -l t[a-c]st</code> Replace with a through c<br><code>ls -l t[!d]st</code> is replaced with d<br>pwd print working directory<br><code>pwd -P</code> If you are in a linked folder, simple pwd will appear in the wrong location. Add the -P option to get the correct path.</p>
+<h3 id="2-Process-files"><a href="#2-Process-files" class="headerlink" title="2 Process files"></a>2 Process files</h3><p><code>touch test</code> creates an empty file<br><code>rm -f</code> Forced deletion<br><code>cp -R Document/ NewDocument/</code> The directory NewDocuments does not exist before the cp -R command is executed. It is created with the cp -R command and the entire contents of the Documents directory is copied into it.<br><font color="Chocolate">**<code>ln -s file slink_file</code> Create a soft link, equivalent to a shortcut **</font><br><code>cp -i file1 file2</code> <strong>-i</strong> option is to ask when performing the operation<br>For example: <code>rm -i</code><br><code>mv -i</code></p>
+<p><code>mkdir -p /path/to/new/dir</code> Create missing parent directories as needed. That is, if you only have &#x2F;path, this command will automatically create the &#x2F;path&#x2F;to, &#x2F;path&#x2F;to&#x2F;new, path&#x2F;to&#x2F;new&#x2F;dir folders.</p>
+<h3 id="3-View-file-content"><a href="#3-View-file-content" class="headerlink" title="3 View file content"></a>3 View file content</h3><p><code>file .bashrc</code> View file types and even the location of soft links<br><code>cat -n file </code> View text and add line number<br><code>less file</code> View large text<br><code>tail -n 5 file </code>or<code>tail -5 file </code> View the last 5 lines<br><code>head -n 5 file </code>or<code>head -5 file </code>View the first 5 lines<br><code>tail -f file</code> This option allows you to view the contents of the file while it is being used by other processes. The tail command remains active and continuously displays the content added to the file. This is a great way to monitor system logs in real time.</p>
+<hr>
+<h2 id="2-Data-Management"><a href="#2-Data-Management" class="headerlink" title="2. Data Management"></a>2. Data Management</h2><h3 id="1-Data-sorting"><a href="#1-Data-sorting" class="headerlink" title="1 Data sorting"></a>1 Data sorting</h3><p><code>sort file</code>By default, the sort command sorts the data lines in the text file according to the sorting rules of the default language specified by the session.<br><code>sort -n file</code> Sort numbers by value in ascending order<br><code>sort -nr file</code> Sort numbers in reverse order by value<br><code>sort -M file</code> Files containing timestamp dates are sorted by the default sorting method</p>
+<h3 id="2Data-search"><a href="#2Data-search" class="headerlink" title="2Data search"></a>2Data search</h3><p>The <code>grep [options] pattern [file]</code>grep command outputs the entire line matching the pattern<br><code>grep -v t file</code> Output lines that do not contain t<br><code>grep -n t file</code> outputs the line and line number containing t<br><code>grep -c t file</code> Output the number of lines containing t<br><code>grep -e t -e r file</code> Output lines containing t and r</p>
+<h3 id="3-command-alias"><a href="#3-command-alias" class="headerlink" title="3 command alias"></a>3 command alias</h3><p><code>alias -p</code> View available aliases<br><code>alias li=&#39;ls -i --color=auto&#39;</code> creates aliases and uses color auto-encoding<br><code>unalias li</code> Delete alias If the deleted alias is not set by you, the alias will appear again the next time you log in to the system. An alias can be permanently removed by modifying the environment file.</p>
+<p><font color="Chocolate"><em>After this is modified in the .bashrc file, the command can be run every time the terminal is started, so that the alias does not have to be renamed every time. When entering a login command that is very long and does not need to be modified, specifying an alias will be an elegant operation</em></font></p>
+<hr>
+<h2 id="3-Environment-variables"><a href="#3-Environment-variables" class="headerlink" title="3. Environment variables"></a>3. Environment variables</h2><h3 id="Set-variables"><a href="#Set-variables" class="headerlink" title="Set variables"></a>Set variables</h3><p>Global environment variables are visible to the shell session and all spawned subshells. Local environment variables are only visible to the shell that created them.</p>
+<ul>
+<li>Set local variables<br><code>my_variable=&quot;Hello World&quot;</code> No spaces between variable name, equal sign, and value</li>
+<li>Set global variables<br>The <code>export my_variable=&quot;Hello World&quot;</code> export command makes it a global environment variable.<br>This can be used to exchange variables between multiple scripts, which may be useful in large scripts.</li>
+</ul>
+<p>-Remove environment variables<br><code>unset my_variable</code> </p>
+<hr>
+<h2 id="4-Build-basic-scripts"><a href="#4-Build-basic-scripts" class="headerlink" title="4. Build basic scripts"></a>4. Build basic scripts</h2><p>To run two commands together, you can put them on the same line and separate them with semicolons.<br>For example:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash </span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> &#123;0..8&#125;; <span class="hljs-keyword">do</span> <span class="hljs-built_in">cd</span> condor_prime1v2_<span class="hljs-variable">$&#123;i&#125;</span>; <span class="hljs-built_in">source</span> SplitAndRun.sh; <span class="hljs-built_in">cd</span> ..; <span class="hljs-keyword">done</span> <br></code></pre></td></tr></table></figure>
+<h3 id="1-echo-command"><a href="#1-echo-command" class="headerlink" title="1 echo command"></a>1 <strong>echo command</strong></h3><ul>
+<li>By default, there is no need to use quotes to delimit the string to be displayed<br><code>echo this is a test</code></li>
+<li>The echo command can use single quotes or double quotes to delimit strings <code>echo &quot;this&#39;s a test&quot;</code><br><code>echo -n</code> The string and command output are displayed on the same line, that is, no line breaks</li>
+</ul>
+<h3 id="2-Custom-variables"><a href="#2-Custom-variables" class="headerlink" title="2 Custom variables"></a>2 <strong>Custom variables</strong></h3><ul>
+<li>Variable names are case sensitive</li>
+<li>Use the equal sign to assign a value to a variable. <strong>No spaces between variables, equal signs and values ​​<code>a=1; str=&quot;test&quot;</code></strong></li>
+</ul>
+<h3 id="3-Command-Substitution"><a href="#3-Command-Substitution" class="headerlink" title="3 Command Substitution"></a>3 <strong>Command Substitution</strong></h3><p>Extract information from command output and assign it to variables</p>
+<ul>
+<li>Backtick (&#96;) <em>This can show you are a master, but it is more recommended to use the following one, because it is similar to other variable naming formats</em></li>
+<li>$() format</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">today=$(<span class="hljs-built_in">date</span> +%y%m%d) <span class="hljs-comment">#prints the date with two digits: 240116</span><br><span class="hljs-built_in">cat</span> <span class="hljs-built_in">log</span> &gt; <span class="hljs-built_in">log</span>.<span class="hljs-variable">$today</span><br></code></pre></td></tr></table></figure>
+
+<p><em>Tips</em><br><code>yy</code>Copy a line<br><code>p</code> Paste a line<br><code>u</code>Undo the last operation<br><code>.</code>Repeat last operation<br><code>/test</code>Search test<br><code>:</code> last line mode, more operations can be performed<br><code>:1</code> locates the first line<br><code>:$</code> locates the last line<br><code>:.,.+5w test.tst</code>The output of the five lines after the current line is test.txt</p>
+<h3 id="4-Mathematical-operations"><a href="#4-Mathematical-operations" class="headerlink" title="4 Mathematical operations"></a>4 <strong>Mathematical operations</strong></h3><p>Use square brackets to assign the result of a mathematical operation to the variable <code>a=$[(1+1)*2]</code> but the bash shell only supports integer operations<br><em>floating point calculation</em></p>
+<ul>
+<li>bc calculator<br>Access the bash calculator via <code>bc</code> and exit the calculator via <code>quit</code></li>
+<li>use bc in scripts<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">a=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;scale=4; 3.4 / 5&quot;</span> | bc) <span class="hljs-comment">#scale sets four decimal places</span><br></code></pre></td></tr></table></figure></li>
+<li><strong>Double brackets(())</strong> Statements inside double brackets can use advanced mathematical expressions without escaping the greater than sign or the like &gt;</li>
+<li><em>I think in general, you can use double brackets without thinking, and just use bc for floating point numbers</em></li>
+</ul>
+<p><strong>Exit status code</strong><br><code>echo $?</code> saves the exit status code of the last executed command, the status code without error is 0</p>
+<hr>
+<h2 id="5-Structured-commands"><a href="#5-Structured-commands" class="headerlink" title="5. Structured commands"></a>5. Structured commands</h2><h3 id="1-if-then"><a href="#1-if-then" class="headerlink" title="1 if-then"></a>1 if-then</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> <span class="hljs-built_in">command</span> <span class="hljs-comment">#if the command&#x27;s exit status is 0</span><br><span class="hljs-keyword">then</span> <br>commands <span class="hljs-comment">#then the commands in the block are executed</span><br><span class="hljs-keyword">else</span> <br>commands <span class="hljs-comment">#otherwise, execute the else branch</span><br><span class="hljs-keyword">fi</span> <br><span class="hljs-comment">#nested structure</span><br><span class="hljs-keyword">if</span> command1 <span class="hljs-keyword">then</span> <br>commands <span class="hljs-keyword">elif</span> command2 <span class="hljs-keyword">then</span><br>commands <span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Numerical comparison</strong><br><em>There are not many statements that use square brackets. Basically, except for conditional judgments, parentheses are used for everything else</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$n1</span> -gt <span class="hljs-variable">$n2</span> ] <br><span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$n1</span><br><span class="hljs-keyword">else</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$n2</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">condition</th>
+<th align="center">describe</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">n1 -eq n2</td>
+<td align="center">n1 &#x3D; n2</td>
+</tr>
+<tr>
+<td align="center">n1 -ge n2</td>
+<td align="center">n1 &gt;&#x3D; n2</td>
+</tr>
+<tr>
+<td align="center">n1 -gt n2</td>
+<td align="center">n1 &gt; n2</td>
+</tr>
+<tr>
+<td align="center">n1 -le n2</td>
+<td align="center">n1 &lt;&#x3D; n2</td>
+</tr>
+<tr>
+<td align="center">n1 -lt n2</td>
+<td align="center">n1 &lt; n2</td>
+</tr>
+<tr>
+<td align="center">n1 -ne n2</td>
+<td align="center">n1 !&#x3D; n2</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>String comparison</strong></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">condition</th>
+<th align="center">describe</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">str1 &#x3D; str2</td>
+<td align="center">Are str1 and str2 consistent</td>
+</tr>
+<tr>
+<td align="center">str1 !&#x3D; str2</td>
+<td align="center">Are str1 and str2 inconsistent</td>
+</tr>
+<tr>
+<td align="center">str1 &lt; str2</td>
+<td align="center">**</td>
+</tr>
+<tr>
+<td align="center">str1 &gt; str2</td>
+<td align="center">**</td>
+</tr>
+<tr>
+<td align="center">-n str1</td>
+<td align="center">Check whether the length of str1 is not 0</td>
+</tr>
+<tr>
+<td align="center">-z str1</td>
+<td align="center">Check whether the length of str1 is 0</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><em>Whether one string is greater or less than another string</em></p>
+</li>
+<li><p>The greater than and less than signs must be <strong>escaped</strong><code>str1 \&gt; str2</code>, otherwise the shell will treat them as redirection characters</p>
+</li>
+<li><p>The size comparison is the Unicode encoding value of the character</p>
+</li>
+<li><p>The order of greater than and less than is different from that used by the sort command</p>
+</li>
+<li><p><strong>Boolean operator symbols</strong><br>&amp;&amp; and<br>|| or</p>
+</li>
+</ul>
+<p><strong>Advanced Apps</strong></p>
+<ul>
+<li><strong>Double brackets(())</strong> Statements inside double brackets can use advanced mathematical expressions without escaping the greater than sign or the like &gt;</li>
+<li><strong>case command</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">read</span> choice <br><span class="hljs-keyword">case</span> <span class="hljs-variable">$choice</span> <span class="hljs-keyword">in</span><br>    a)<br>    <span class="hljs-built_in">command</span><br>    ;;<br>    b)<br>    <span class="hljs-built_in">command</span><br>    ;;<br>    *)<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;no choice&quot;</span><br>    ;;<br><span class="hljs-keyword">esac</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-for"><a href="#2-for" class="headerlink" title="2 for"></a>2 for</h3><ul>
+<li>for a in <em>list</em>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">list=abc <span class="hljs-string">&quot;ab&#x27;c&quot;</span> <span class="hljs-string">&quot;ab c&quot;</span> <br><span class="hljs-keyword">for</span> <span class="hljs-built_in">test</span> <span class="hljs-keyword">in</span> abc <span class="hljs-string">&quot;ab&#x27;c&quot;</span> <span class="hljs-string">&quot;ab c&quot;</span><br><span class="hljs-keyword">do</span> <br>  <span class="hljs-built_in">command</span><br><span class="hljs-keyword">done</span><br>file=<span class="hljs-string">&quot;list.txt&quot;</span><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">test</span> <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">cat</span> <span class="hljs-variable">$file</span>) <span class="hljs-comment">#iterate using spaces, tabs, and newlines as field separators</span><br>IFS=$<span class="hljs-string">&#x27;\n&#x27;</span> <span class="hljs-comment">#use newlines as the separator, skipping spaces and tabs inside fields</span><br>IFS=$<span class="hljs-string">&#x27;\n:&#x27;</span> <span class="hljs-comment">#use newlines and colons as field separators</span><br></code></pre></td></tr></table></figure></li>
+<li>for a in <em>range</em><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> ((a=<span class="hljs-number">1</span>,b=<span class="hljs-number">10</span>;a&lt;=<span class="hljs-number">10</span>;a++.b--)) <span class="hljs-comment">#a C-like shell command</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="3-while-and-until"><a href="#3-while-and-until" class="headerlink" title="3 while and until"></a>3 <code>while</code> and <code>until</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">a=3<br><span class="hljs-keyword">while</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$a</span> <span class="hljs-comment">#this only demonstrates that a command can be placed in while</span><br>  [ <span class="hljs-variable">$a</span> -ge 0 ] <span class="hljs-comment">#leave a space inside the square brackets</span><br><span class="hljs-keyword">do</span><br>  a=$[<span class="hljs-variable">$a</span>-1] <span class="hljs-comment">#no spaces are allowed around assignment; alternatively use parentheses: a=$(($a-1))</span><br><span class="hljs-keyword">done</span><br><span class="hljs-keyword">until</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$a</span> <br>  [ <span class="hljs-variable">$a</span> -eq 0 ]<br><span class="hljs-keyword">do</span><br>  a=$[<span class="hljs-variable">$a</span>-1]<br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<hr>
+<h3 id="4-break-and-continue"><a href="#4-break-and-continue" class="headerlink" title="4 break and continue"></a>4 <code>break</code> and <code>continue</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> ((a=<span class="hljs-number">1</span>;a&lt;<span class="hljs-number">4</span>;a++))<br><span class="hljs-keyword">do</span> <br>  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> -eq 2 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">continue</span> <span class="hljs-comment">#continue stops this iteration and starts the next one</span><br>  <span class="hljs-keyword">fi</span><br>  <span class="hljs-keyword">for</span> ((b=<span class="hljs-number">1</span>;b&lt;<span class="hljs-number">4</span>;b++))<br>  <span class="hljs-keyword">do</span> <br>    <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$b</span> -eq 2 ]; <span class="hljs-keyword">then</span><br>      <span class="hljs-built_in">break</span> 2 <span class="hljs-comment">#break normally stops one loop; 2 stops this loop and its outer loop</span><br>    <span class="hljs-keyword">fi</span><br>  <span class="hljs-keyword">done</span><br><span class="hljs-keyword">done</span> &gt; test.txt <span class="hljs-comment">#write the loop output to a file, or pipe it to another command such as: done | sort</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-read"><a href="#5-read" class="headerlink" title="5 read"></a>5 <code>read</code></h3><p><code>echo -n</code> The string and command output are displayed on the same line, that is, no line breaks<br><code>read -p</code> can specify prompt characters<br><code>read -t 5</code> If there is no input for more than 5 seconds, a non-0 exit status code will be returned.<br><code>read -n 1</code> automatically exits and assigns a value when the number of characters entered is 1.<br><code>read -s</code> will not display entered data, used for passwords</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;enter your name:&quot;</span><br><span class="hljs-built_in">read</span> name<br><span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;enter your name:&quot;</span> first last <span class="hljs-comment">#both forms work; this form can assign multiple variables</span><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">read</span> -t 5 -p <span class="hljs-string">&quot;enter your name:&quot;</span> first last<br><span class="hljs-keyword">then</span> <br><span class="hljs-keyword">else</span> <br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;time out&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-built_in">read</span> -n 1 -p <span class="hljs-string">&quot;enter y/n&quot;</span> chose<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-Output-and-input"><a href="#6-Output-and-input" class="headerlink" title="6. Output and input"></a>6. Output and input</h2><p>A command will display output on the terminal monitor. Correct output will point to the STDOUT file, and incorrect output will point to the STDERR file.</p>
+<ul>
+<li><p>standard file descriptor<br>0 standard input 1 standard output 2 standard error<br><code>ls file1 file2 file3 1&gt;out 2&gt;err</code> 1 points to the correct output, 2 points to the incorrect output. If not specified, both correct and incorrect output will be output to the terminal.<br><code>ls file1 file2 file3 &amp;&gt;both</code> &amp; will output both</p>
+</li>
+<li><p>redirect output<br>If you intentionally generate error messages in your script, you can redirect a single line of output to STDERR. This simply requires redirecting output to the STDERR file descriptor using the output redirection symbol. When redirecting to a file descriptor, you must precede the file descriptor index value with an &amp;:<br><code>echo &quot;This is an error message&quot; &gt;&amp;2</code></p>
+</li>
+<li><p>exec command<br>The exec command starts a new shell and redirects the STDOUT file descriptor to the specified file, such as <code>exec 2&gt;error</code><br><code>exec 0&lt;inputfile</code> This allows the script to get input in the file testfile instead of the keyboard. The previous read command read data 0 from STDIN, which is the data entered through the keyboard. Redirecting 0 to inputfile here means that the data will be read from here.<br><code>exec 3&gt;file3out</code> You can customize a descriptor so that the output you want to output can be placed within the 3 symbol later. <code>echo &quot;This should be stored in a file&quot; &gt;&amp;3</code> can maintain the normal output of the display and redirect specific information to a specified file (such as a log file)</p>
+</li>
+<li><p>Fantastic little features</p>
+</li>
+<li><p><code>/dev/null</code> is like a trash can<br><code>echo &quot;This is an error message&quot; &gt; /dev/null</code> will discard the data<br><code>cat /dev/null &gt; testfile</code> This will directly clear the file contents without re-creating it.</p>
+</li>
+<li><p><code>mktemp testfile.XXXXXX</code> will fill in any characters and create a <em>file</em><br><code>mktemp -t testfile.XXXXXX</code> will create a file in the system’s temporary directory &#x2F;tmp&#x2F;test.XXXXXX<br><code>mktemp -d testdir.XXXXXX</code> will fill in any characters and create a <em>folder</em></p>
+</li>
+<li><p><code>tee test</code> is like a T-to-interface<br><code>data | tee test</code> will be output to the screen and the test file at the same time (&gt;test)<br><code>data | tee -a test</code> will not overwrite test(&gt;&gt;test)</p>
+</li>
+</ul>
+<hr>
+<h2 id="7-Script-running"><a href="#7-Script-running" class="headerlink" title="7. Script running"></a>7. Script running</h2><h3 id="1-System-signals-and-generation"><a href="#1-System-signals-and-generation" class="headerlink" title="1 System signals and generation"></a>1 System signals and generation</h3><table>
+<thead>
+<tr>
+<th align="center">sig</th>
+<th align="center">value</th>
+<th align="center">mean</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">SIGHUP</td>
+<td align="center">hang</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">SIGINT</td>
+<td align="center">Interrupt -&gt; Ctrl+C</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">SIGQUIT</td>
+<td align="center">Stop</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">SIGKILL</td>
+<td align="center">Unconditional termination -&gt; kill -9 PID</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">SIGTSTP</td>
+<td align="center">Stop or pause without terminating -&gt; Ctrl+Z</td>
+</tr>
+</tbody></table>
+<ul>
+<li>trap command trap <em>command</em> <em>signals</em><br><code>trap &quot;echo &#39;trapped Ctrl+C&#39;&quot; SIGINT</code> Entering Ctrl+C will not stop the script but execute the echo command, which prevents the command from being interrupted.</li>
+</ul>
+<h3 id="2-Script-runs-in-the-background"><a href="#2-Script-runs-in-the-background" class="headerlink" title="2 Script runs in the background"></a>2 Script runs in the background</h3><p><code>&amp;</code> Adding &amp; after a command can make the command run in the background, and by redirecting 1 and 2, the terminal will not display information and achieve complete silence.<br><code>ps</code> can view current job information<br><code>jobs</code> It is more recommended to use the jobs command to check the job status and have some command line options.<br>  <code>-l PID</code> | <code>-r running</code> | <code>-s stopped</code><br><em>Tips: Plus and minus signs in <code>jobs</code> output. A job with a plus sign is the default job; if a job-control command does not specify a job number, it refers to that job. A job with a minus sign becomes the next default job after the current default job ends. At any time, there can be only one job with a plus sign and one with a minus sign.</em></p>
+<hr>
+<h2 id="8-Advanced-scripts"><a href="#8-Advanced-scripts" class="headerlink" title="8. Advanced scripts"></a>8. Advanced scripts</h2><ul>
+<li>function<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">function</span> func1 &#123; <span class="hljs-comment">#define a function</span><br>  <span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;enter your number:&quot;</span> a<br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span> *2&quot;</span> |bc<br>&#125;<br>func1 <span class="hljs-comment">#call func1 directly</span><br>result=$(func1) <span class="hljs-comment">#store the function result in $result</span><br><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\nyour result is <span class="hljs-variable">$result</span>&quot;</span> <span class="hljs-comment">#-e enables escape sequences such as \n</span><br><br><span class="hljs-keyword">function</span> func2 &#123;<br>  <span class="hljs-comment">#local result=$(echo &quot;$1 * $2&quot; |bc) #local keeps the variable inside the function</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span> * <span class="hljs-variable">$2</span>&quot;</span> |bc<br>&#125;<br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -eq 2 ]; <span class="hljs-keyword">then</span>   <span class="hljs-comment">#`$#` gives the number of arguments</span><br>  result=$(func2 <span class="hljs-variable">$1</span> <span class="hljs-variable">$2</span>) <span class="hljs-comment">#for example, run: source test.sh 1.1 2</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;your result is <span class="hljs-variable">$result</span>&quot;</span> <br><span class="hljs-keyword">else</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;error&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure></li>
+<li>array<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#input array</span><br><span class="hljs-keyword">function</span> func3 &#123;<br>  <span class="hljs-built_in">local</span> myarray=($(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>)) <span class="hljs-comment">#`$@` expands the argument list</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;myarray[*]&#125;</span> <span class="hljs-comment">#expand all array elements as one argument, separated by the first character of IFS</span><br>&#125;<br>array=(1 2 3 4 5)<br><span class="hljs-comment">#array=(&quot;apple&quot; &quot;banana&quot; &quot;cat&quot;)</span><br>func3 <span class="hljs-variable">$&#123;array[*]&#125;</span><br><br><span class="hljs-comment">#output array</span><br><span class="hljs-keyword">function</span> func4 &#123;<br>  <span class="hljs-built_in">local</span> n=(<span class="hljs-variable">$#</span>)<br>  <span class="hljs-built_in">local</span> myarray=($(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>))<br>  <span class="hljs-built_in">local</span> newarray=($(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>)) <span class="hljs-comment">#create a newarray with the same size so its elements can be replaced in order</span><br>  <span class="hljs-keyword">for</span> (( i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-variable">$n</span>; i++))&#123;<br>    newarray[<span class="hljs-variable">$i</span>]=$((<span class="hljs-variable">$&#123;myarray[$i]&#125;</span> * <span class="hljs-number">2</span>))<br>  &#125;<br>  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;newarray[*]&#125;</span><br>&#125;<br>array=(1 2 3 4 5)<br>func4 <span class="hljs-variable">$&#123;array[*]&#125;</span><br></code></pre></td></tr></table></figure></li>
+<li>recursion<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">function</span> func5 &#123;<br>  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$1</span> -eq 1 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$1</span><br>  <span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">local</span> x=$(( <span class="hljs-variable">$1</span> - <span class="hljs-number">1</span> ))  <span class="hljs-comment">#calculate n-1</span><br>    <span class="hljs-built_in">local</span> result=$(func5 <span class="hljs-variable">$x</span>)<br>    <span class="hljs-built_in">echo</span> $((<span class="hljs-variable">$result</span> * <span class="hljs-variable">$1</span>)) <span class="hljs-comment">#</span><br>  <span class="hljs-keyword">fi</span><br>&#125;<br><span class="hljs-built_in">read</span> a<br><span class="hljs-built_in">echo</span> $(func5 <span class="hljs-variable">$a</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="9-sed-command"><a href="#9-sed-command" class="headerlink" title="9. sed command"></a>9. sed command</h2><p><font color="Chocolate"><em>It should be noted that the sed command will not modify the original file, but the output in the terminal will change. You can use redirection to output the sed-modified file or use the -i option to directly modify the file content</em></font></p>
+<ul>
+<li><p>Used to modify text in batches<br><code>sed &#39;s/old/new/&#39; test.txt</code> s is the replacement command<br><code>sed -e &#39;s/old1/new1/; s/old2/new2/&#39; test.txt</code> Multiple modifications, pay attention to semicolons and single quotes<br><code>sed -f txt.sed test.txt</code> Put <code>s/old1/new1/</code> into txt.sed and use the -f option to make a lot of modifications<br><code>sed &#39;d&#39; test.txt</code> d is the delete command <font color="red"><em>Use with caution</em> </font><br><code>sed &#39;i\text&#39;</code> and <code>sed &#39;a\text&#39;</code> add a line before and after the specified line respectively.</p>
+</li>
+<li><p>Command group <em>If you need to execute multiple commands in a single line, you can use curly braces to group them together</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;/test/&#123;            </span><br><span class="hljs-string">&gt; =  </span><br><span class="hljs-string">&gt; p  </span><br><span class="hljs-string">&gt; &#125;&#x27;</span> test.txt<br></code></pre></td></tr></table></figure>
+
+</li>
+<li><p>Replacement flag<br><code>sed &#39;s/pattern/replacement/flags</code> flag is a replacement flag. There are four types that can be written together.</p>
+</li>
+<li><p>Number specifies the number in the text<br><code>echo -e &quot;test1 test1 test2 \ntest3 test4&quot;|sed &#39;s/test1/new/2&#39;</code><br>-&gt;test1 new test2<br>-&gt;test3 test4<br>-g replace all<br><code>echo -e &quot;test1 test1 test2 \ntest3 test4&quot;|sed &#39;s/test1/new/g&#39;</code><br>-&gt;new new test2<br>-&gt;test3 test4<br>-p prints out the replaced lines <em>-n means only print matching lines</em><br><code>echo -e &quot;test1 test1 test2 \ntest3 test4&quot;|sed -n &#39;s/test1/new/gp&#39;</code><br>-&gt;new new test2<br>-w <em>file</em> writes the replacement results to a file</p>
+</li>
+<li><p><em><code>sed &#39;s|//ccc0|\nchain-&gt;Add(\&quot;$&#123;FILE_PATH&#125;\&quot;)|g&#39;</code>When &#x2F; will cause confusion, you can use some other symbol to separate it</em></p>
+</li>
+<li><p>Specify the row address <em>Same applies to i and a</em></p>
+</li>
+<li><p><code>sed &#39;2s/test1/new/&#39;</code> specifies line 2</p>
+</li>
+<li><p><code>sed &#39;2,4s/test1/new/&#39;</code> specifies lines 2 to 4</p>
+</li>
+<li><p><code>sed &#39;2,$s/test1/new/&#39;</code> specifies 2 lines after <em>$ represents the last line</em></p>
+</li>
+<li><p>Print<br>-p <em>print text</em></p>
+</li>
+<li><p>&#x3D; <em>Print line number</em></p>
+</li>
+<li><p>| <em>List lines, you can print out non-printable characters, such as \t</em></p>
+</li>
+<li><p><code>sed -n &#39;/test/p&#39;</code> is similar to <code>grep test</code>. The former is more advanced and can use regular expressions. See Chapter 11.</p>
+</li>
+</ul>
+<hr>
+<h2 id="10-gawk-command"><a href="#10-gawk-command" class="headerlink" title="10. gawk command"></a>10. gawk command</h2><p><em>Is an enhanced version of awk</em><br><code>gawk &#39;&#123;print &quot;hello&quot;&#125;&#39;</code> sets hello to display a fixed line of text string, so no matter what text is entered in the data stream, you will get the same text output<br><code>echo &quot;me:hello world&quot; |awk  &#39;&#123;print $1&#125;&#39; </code> -&gt;me:hello uses spaces as delimiters by default<br><code>echo &quot;me:hello world&quot; |awk -F: &#39;&#123;print $1&#125;&#39; </code>-&gt;me <font color="Chocolate"> **-F: You can specify: as the delimiter **</font> -F’[:&#x2F;]’ You can specify multiple characters</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">---<span class="hljs-keyword">for</span> test.gawk---<br>BEGIN &#123;<br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;title:character table&quot;</span><br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;character \t number&quot;</span><br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;---- \t ----&quot;</span><br>  &#125;<br>&#123;<br>  <span class="hljs-built_in">print</span> <span class="hljs-variable">$1</span> <span class="hljs-string">&quot;\t&quot;</span> <span class="hljs-variable">$2</span> <br>&#125;<br>END &#123;<br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;end&quot;</span><br> &#125; <br>---<br>gawk -f test.gawk test.txt <span class="hljs-comment">#like sed&#x27;s -f option, commands can be placed in a file</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Some-common-processing"><a href="#Some-common-processing" class="headerlink" title="Some common processing"></a>Some common processing</h4><ul>
+<li>Mathematical expressions<br><code>gawk &#39;$1 == 0 &#123;print $0&#125;&#39;</code> means that if the first column is 0, the entire line will be output.</li>
+<li>if statement<br><code>gawk &#39;&#123;if ($1 &gt; 2) print $1&#125;&#39; </code><br><code>gawk &#39;&#123;if ($1 &gt; 2) &#123;a = $1 *2 ; print a&#125; else &#123;print $2&#125;&#125;&#39; test.txt </code></li>
+<li>while,for statement <em>similar to if</em></li>
+</ul>
+<h4 id="printf-formatted-printing"><a href="#printf-formatted-printing" class="headerlink" title="printf formatted printing"></a>printf formatted printing</h4><p><em>Need to add a newline character, otherwise it will be output on the same line</em></p>
+<blockquote>
+<p>printf “<em>format string”, var1, var2​​</em><br>The format of <em>format string</em> is <em>%[modifier]control-letter</em><br><font color="Chocolate">%d or %i displays an integer<br>%eScientific notation<br>%f displays floating point %2.1f retains one decimal place<br>%s displays the string </font></p>
+</blockquote>
+<p><code>gawk &#39;BEGIN&#123;FS=&quot;,&quot;&#125; &#123;printf &quot;%s &quot;, $1&#125; END&#123;printf &quot;\n&quot;&#125;&#39; </code> is set as the delimiter and prints the characters in the first column. Since there is no line break, a line break is output at the end, so that the characters in the first column will be output on the same line.</p>
+<p><code>gawk &#39;BEGIN&#123;FS=&quot;\n&quot;; RS=&quot;&quot;&#125; &#123;printf &quot;%-16s %s\n&quot;, $1, $4&#125;&#39; data2￼</code> %16s means the output width is 16 characters right-aligned %-16s left-aligned</p>
+<blockquote>
+<p>Ima Test<br>123 Main Street<br>Chicago, IL 60601<br>(312)555-1234￼</p>
+<p>Frank Tester￼<br>456 Oak Street<br>Indianapolis, IN 46201￼<br>(317)555-9876￼</p>
+</blockquote>
+<p><em>By default, RS is the newline character \n, indicating that the record is one line. Setting RS to blank here means that before a blank line appears, it is viewed as one line, with the newline character as the separator, and the 4th column is the phone column</em></p>
+<hr>
+<h2 id="11-Regular-expressions"><a href="#11-Regular-expressions" class="headerlink" title="11. Regular expressions"></a>11. Regular expressions</h2><h3 id="Can-be-used-in-sed-and-gawk"><a href="#Can-be-used-in-sed-and-gawk" class="headerlink" title="&gt; Can be used in sed and gawk"></a>&gt; Can be used in sed and gawk</h3><ul>
+<li>Anchor character</li>
+<li><code>^</code> anchors the beginning of the line<br><code>sed -n &#39;/^this/p&#39;</code> will only match lines starting with this</li>
+<li><code>$</code> anchors end of line<br><code>sed -n &#39;/end$/p&#39;</code> will only match lines ending with this</li>
+<li>Combine anchor points to delete blank lines<br><code>sed &#39;/^$/d&#39;</code><font color="Chocolate">Highly recommended </font></li>
+<li>period character<br><em>The dot character can match any single character except newline characters. The period character must match one character</em></li>
+<li>character group []<br><code>echo &quot;Yes&quot; | sed -n &#39;/[Yy]es/p&#39;￼</code><br><code>sed -n &#39;^[0-9][0-9]$/p&#39;</code> will match two digits<br><code>sed -n &#39;[^ch]at$/p&#39;</code> ^ is placed in square brackets to exclude it.</li>
+<li>Asterisk <em>The asterisk indicates that the preceding character can appear 0 or more times</em><br><code>echo &quot;ik&quot; | sed -n &#39;/ie*k/p&#39;</code> can still be matched in this way</li>
+</ul>
+<h3 id="Cannot-be-used-in-sed"><a href="#Cannot-be-used-in-sed" class="headerlink" title="&gt; Cannot be used in sed"></a>&gt; Cannot be used in sed</h3><ul>
+<li>Question mark <em>Question mark indicates that the preceding character can appear 0 or 1 times</em></li>
+<li>Plus sign <em>The plus sign indicates that the preceding character can appear 1 or more times</em></li>
+<li>Curly brackets {m,n} <em>indicates that the preceding character can appear m to n times</em><br>By default, gawk does not recognize regular expression intervals. You must specify the gawk command line option –re-interval.<br><code>echo &quot;beet&quot; | gawk --re-interval &#39;/be&#123;1&#125;t/&#123;print $0&#125;&#39;</code></li>
+<li>Vertical lines <em>Vertical lines represent or</em><br><code>gawk &#39;/cat|dog/&#123;print $0&#125;&#39;</code></li>
+<li>Expression grouping ()<br><code>gawk &#39;/(c|b)a(b|t)/&#123;print $0&#125;&#39;￼</code></li>
+</ul>
+<hr>
+<h2 id="Postscript"><a href="#Postscript" class="headerlink" title="Postscript"></a>Postscript</h2><p><em>Some messy notes, no guarantee of accuracy</em></p>
+<p>du -sh .<br>sed -i “s&#x2F;forward0&#x2F;forward&#x2F;g” crab3_forward0_Ntuple.py<br><code>grep -o &quot;$FIELD&quot; &quot;$FILE&quot; | wc -l</code> Number of occurrences<br><code>grep -A 5 &quot;$FIELD&quot;  &quot;$FILE&quot;</code> appears 5 lines after<br>kill $(jobs -p)<br>condor_rm -all<br>condor_rm -all -name lpcschedd6.fnal.gov Delete condor jobs on lpc</p>
+<p>The ls -lhtr command will list the detailed information of all files and subdirectories in the current working directory in human-readable form, in reverse order of modification time. This makes it easy to view recently modified files.<br>cat ion.C |wc determines the number of lines of ioc</p>
+<p>s&#x2F;old&#x2F;new&#x2F;gc replaces all occurrences of old in the entire file and prompts for each replacement.</p>
+<p>When writing a shell script .sh file in the terminal, you can use the following method to achieve simultaneous indentation of multiple lines:</p>
+<ol>
+<li>Use vim to open your shell script file, and then press the ESC key to enter command mode.</li>
+<li>Press the ctrl+v keys to enter visual block mode, and then use the up and down keys to select the multiple lines of code you want to indent.</li>
+<li>Press the shift+i keys to enter insert mode, and then continuously tap the space bar to add indentation (note that only one line will display indentation at this time).</li>
+<li>Finally press the esc key and you will find that all selected lines are indented by 1.<br>If you want to remove spaces in front of multiple lines, you can follow these steps:</li>
+<li>Also press the ctrl+v keys to enter the visual block mode, and then use the up, down, left and right keys to select the multiple lines of code you want to delete spaces and the preceding spaces.</li>
+<li>Then press the del key to delete the selected space 1.</li>
+</ol>
+<p>chmod -R 755 public&#x2F; sets the permissions of the folder and subfolders to rwxr-xr-x<br>r: read, you can read the contents of this file, that is, you can open the file;<br>w: write, you can edit the content of this file, such as adding, deleting, and changing the file content;<br>x: execute, this file can be executed.<br>￼<img src="/postfigure/linux/4.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<p>Copy the root data file on cds to the server<br>xrdcp -d 1 -f root:&#x2F;&#x2F;xrootd-cms.infn.it&#x2F;&#x2F;</p>
+<p>The .h header file can be obtained using the mymultilep.root file generated by cmsRun in the crab step.<br>root &#x2F;path&#x2F;***.root<br>.ls      &#x2F;&#x2F;mkcands<br>mkcands-&gt;cd()<br>.ls      &#x2F;&#x2F;X_data<br>X_data-&gt;MakeClass(“myntuple”)<br><img src="/postfigure/linux/Attaching.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<p>Lpc sometimes cannot use some commands<br>source &#x2F;cvmfs&#x2F;cms.cern.ch&#x2F;cmsset_default.sh<br>source &#x2F;cvmfs&#x2F;cms.cern.ch&#x2F;crab3&#x2F;crab.sh</p>
+<p>Modify path; clear;<br>scramv1 b  ProjectRename<br>scramv1 b clean<br>scramv1 b  </p>
+<p>Remove duplicate rows<br>cat hh.txt | sort -g -k7 | uniq</p>
+<p>disown -h %1 Invincible code, I would like to call it God! The job with serial number 1 is suspended in the background, and no stop code is sent when the connection is disconnected. Previously, if the background was suspended, the job would end if the connection was disconnected.</p>
+<p><img src="/postfigure/linux/linux.png" srcset="/img/loading.gif" lazyload alt="The Linux Command Line and Shell Scripting Bible"><br>This article refers to this book. If you have any questions, please download and read it yourself.<br><a target="_blank" rel="noopener" href="https://zh.z-library.se/book/15316978/c14dce/linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8Eshell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E5%A4%A7%E5%85%A8-%E7%AC%AC3%E7%89%88-%E5%9B%BE%E7%81%B5%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E4%B8%9B%E4%B9%A6.html">The Linux Command Line and Shell Scripting Bible</a></p>
+<hr>
+<p>END</p>
+<div style="text-align: right;"> written by zhuf </div>
+
+<hr>
+<h1 id="linux-advanced-and-server-management"><a href="#linux-advanced-and-server-management" class="headerlink" title="linux advanced and server management"></a>linux advanced and server management</h1><h2 id="Zero-some-small-knowledge-to-supplement-the-previous-ones"><a href="#Zero-some-small-knowledge-to-supplement-the-previous-ones" class="headerlink" title="Zero, some small knowledge to supplement the previous ones"></a>Zero, some small knowledge to supplement the previous ones</h2><ul>
+<li>language<br><code>locale</code> displays the current language<br>LANG&#x3D;”zh_CN.UTF-8”<br>LC_COLLATE&#x3D;”zh_CN.UTF-8”<br>LC_CTYPE&#x3D;”zh_CN.UTF-8”<br>LC_MESSAGES&#x3D;”zh_CN.UTF-8”<br>LC_MONETARY&#x3D;”zh_CN.UTF-8”<br>LC_NUMERIC&#x3D;”zh_CN.UTF-8”<br>LC_TIME&#x3D;”zh_CN.UTF-8”<br>LC_ALL&#x3D;</li>
+</ul>
+<p><code>LANG=en_US.utf8</code> Modify the output information to English<br><code>export LC_ALL=en_US.utf8</code> Synchronously update LC_ALL</p>
+<ul>
+<li>man command<br>When you don’t know how to use a command, just click “man” and you will know that the displayed manual is usually divided into the following parts:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Codename</th>
+<th align="center">Content</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">NAME</td>
+<td align="center">A short command description. In addition to the command, there are some numbers in brackets in the upper left corner. These are more important: 1. User-executable commands or files; 5. Configuration files or the format of a certain file; 8. Commands available to system administrators</td>
+</tr>
+<tr>
+<td align="center">SYNOPSIS</td>
+<td align="center">Short command syntax</td>
+</tr>
+<tr>
+<td align="center">DESCRIPTION</td>
+<td align="center">Full description</td>
+</tr>
+<tr>
+<td align="center">COMMANDS</td>
+<td align="center">When the program is executed, this command can be issued in the program</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>File permissions<br>Each file in Linux has three identity permissions: User, Group, and Others. Check the file permissions with <code>ls -al</code><br><img src="/postfigure/linux/image-7.png" srcset="/img/loading.gif" lazyload alt="Alt text"><img src="/postfigure/linux/image-8.png" srcset="/img/loading.gif" lazyload alt="Alt text"><br>File type [d] directory [-] file [l] link file</p>
+</li>
+<li><p>Change file attributes</p>
+</li>
+<li><p>chgrp changes the group to which the file belongs<br><code>/etc/group</code> is the name of the group that exists. Use <code>chgrp [group name] [file name]</code> to copy the corresponding file</p>
+</li>
+<li><p>chown changes file owner<br>Users exist in <code>/etc/passwd</code>. Use <code>chown -R [user name] [dirname/filename]</code> or <code>chown -R [user name]:[group name] [dirname/filename]</code> to modify the group and user affiliation. -R represents recursion.</p>
+</li>
+<li><p>chmod changes file permissions<br>File permissions are represented by the sum of numbers r:4 w:2 x:1<br><font color="Chocolate"><em>Some commonly used permission numbers</em></font><br>755 Make the file executable but prevent others from modifying it<br>740 Keep files from being seen by others</p>
+</li>
+<li><p>some instructions<br><code>who</code> Can see who is working secretly<br><code>df</code> Usage of equipment in the system</p>
+</li>
+</ul>
+<h2 id="1-Linux-files-and-directories"><a href="#1-Linux-files-and-directories" class="headerlink" title="1. Linux files and directories"></a>1. Linux files and directories</h2><h3 id="1-1-root-root-directory"><a href="#1-1-root-root-directory" class="headerlink" title="1.1&#x2F;(root)root directory"></a>1.1&#x2F;(root)root directory</h3><table>
+<thead>
+<tr>
+<th align="center">Directory</th>
+<th align="center">Place file contents</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&#x2F;bin</td>
+<td align="center">bin places some operating instructions, such as cat, mv, cp</td>
+</tr>
+<tr>
+<td align="center">&#x2F;boot</td>
+<td align="center">Place boot configuration file</td>
+</tr>
+<tr>
+<td align="center">&#x2F;etc</td>
+<td align="center">System configuration file, including personnel account passwords</td>
+</tr>
+<tr>
+<td align="center">&#x2F;lib</td>
+<td align="center">Place function library</td>
+</tr>
+<tr>
+<td align="center">&#x2F;tmp</td>
+<td align="center">As its name suggests, it is a temporary file</td>
+</tr>
+<tr>
+<td align="center">&#x2F;usr</td>
+<td align="center">(Unix Software Resource) Some system default software, similar to the C drive of window</td>
+</tr>
+<tr>
+<td align="center">&#x2F;dev</td>
+<td align="center">Every device in Linux is treated as a file. This is the device file.</td>
+</tr>
+</tbody></table>
+<p>There are many software sources; you can use some <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/421178143">regional mirrors</a>.<br><code>/etc/apt/sources.list</code> or <code>/etc/apt/sources.list.d/</code> contains the software source link<br><code>sudo apt-get update</code> Update software sources through this command</p>
+<h3 id="1-2-PATH-executable-file-path-variable"><a href="#1-2-PATH-executable-file-path-variable" class="headerlink" title="1.2 $PATH executable file path variable"></a>1.2 $PATH executable file path variable</h3><p>When executing a command “ls”, the system will search for an executable file named ls in each defined directory according to the PATH setting to execute the command.<br>Take $PATH<code>/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</code> as an example. If you use root permissions to move &#x2F;bin&#x2F;ls to the &#x2F;root folder, you cannot execute the <code>ls</code> command in this case. Only when you use the command <code>PATH=&quot;$&#123;PATH&#125;:/root&quot;</code> to add the ls path under &#x2F;root to $PATH can you execute the ls command correctly.<br>If there are two ls, the ls searched first in the directory in $PATH will be executed.</p>
+<p>Not finished. . .</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      
+<i class="iconfont icon-love"></i> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
