@@ -21,13 +21,13 @@
   
     <meta name="description" content="#sheet-container {         width: 100%;     }      .score-grid {         display: grid;         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));         gap: 20px;         margin-top">
 <meta property="og:type" content="website">
-<meta property="og:title" content="乐谱">
-<meta property="og:url" content="http://iceinke.github.io/sheet/index.html">
+<meta property="og:title" content="Sheet Music">
+<meta property="og:url" content="http://iceinke.github.io/sheet/en/index.html">
 <meta property="og:site_name" content="Feng Zhu&#39;s Blog">
 <meta property="og:description" content="#sheet-container {         width: 100%;     }      .score-grid {         display: grid;         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));         gap: 20px;         margin-top">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-24T03:11:27.000Z">
-<meta property="article:modified_time" content="2026-09-18T17:04:14.089Z">
+<meta property="article:modified_time" content="2026-09-18T17:04:23.776Z">
 <meta property="article:author" content="Feng Zhu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>乐谱 - Feng Zhu&#39;s Blog</title>
+  <title>Sheet Music - Feng Zhu&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -125,7 +125,7 @@
                  href="/"
                  target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="首页" data-en-text="Home">首页</span>
+                <span class="navbar-menu-text" data-zh-text="首页" data-en-text="Home">Home</span>
               </a>
             </li>
           
@@ -138,10 +138,10 @@
               <a class="nav-link navbar-menu-link"
                  data-zh-href="/link/"
                  data-en-href="/link/en/"
-                 href="/link/"
+                 href="/link/en/"
                  target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="链接" data-en-text="Links">链接</span>
+                <span class="navbar-menu-text" data-zh-text="链接" data-en-text="Links">Links</span>
               </a>
             </li>
           
@@ -180,7 +180,7 @@
                   
                   
                   <a class="dropdown-item  navbar-menu-link"
-                    data-zh-href="/sheet/" data-en-href="/sheet/en/" href="/sheet/"
+                    data-zh-href="/sheet/" data-en-href="/sheet/en/" href="/sheet/en/"
                     target="_self">
                     <i class="iconfont icon-note"></i>
                     <span class="navbar-menu-text" data-zh-text="乐谱" data-en-text="Sheet Music">乐谱</span>
@@ -211,7 +211,7 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-user-fill"></i>
-                <span class="navbar-menu-text" data-zh-text="关于" data-en-text="About">关于</span>
+                <span class="navbar-menu-text" data-zh-text="关于" data-en-text="About">About</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- 
@@ -266,9 +266,9 @@
         
           
           <li class="nav-item navbar-language-item">
-            <a class="navbar-language-switcher " href="/sheet/en/" aria-label="Switch language">
+            <a class="navbar-language-switcher is-english" href="/sheet/" aria-label="Switch language">
               
-                <span class="navbar-language-chinese is-active">中文</span><span class="navbar-language-english">English</span>
+                <span class="navbar-language-chinese">中文</span><span class="navbar-language-english is-active">English</span>
               
             </a>
           </li>
@@ -284,7 +284,7 @@
               });
             }
             document.addEventListener('DOMContentLoaded', function () {
-              var pageLanguage = 'zh';
+              var pageLanguage = 'en';
               var language = pageLanguage || window.localStorage.getItem('home-language') || 'zh';
               updateNavbarLanguage(language);
             });
@@ -311,7 +311,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">乐谱</span>
+            <span id="subtitle">Sheet Music</span>
           
         </div>
 
@@ -1146,7 +1146,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -1154,7 +1154,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -1225,7 +1225,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
   </noscript>
 </body>
 </html>

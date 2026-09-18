@@ -121,12 +121,18 @@
         
         
         
+        
+        
           
           
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link navbar-menu-link"
+                 data-zh-href="/"
+                 data-en-href="/"
+                 href="/"
+                 target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span class="navbar-menu-text" data-zh-text="首页" data-en-text="Home">首页</span>
               </a>
@@ -138,7 +144,11 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/link/" target="_self">
+              <a class="nav-link navbar-menu-link"
+                 data-zh-href="/link/"
+                 data-en-href="/link/en/"
+                 href="/link/"
+                 target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span class="navbar-menu-text" data-zh-text="链接" data-en-text="Links">链接</span>
               </a>
@@ -153,7 +163,7 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-music"></i>
-                <span class="navbar-menu-text" data-zh-text="Music" data-en-text="Music">Music</span>
+                <span class="navbar-menu-text" data-zh-text="音乐" data-en-text="Music">Music</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- 
@@ -178,11 +188,11 @@
                   
                   
                   
-                  <a class="dropdown-item " 
-                    href="/sheet/"
+                  <a class="dropdown-item  navbar-menu-link"
+                    data-zh-href="/sheet/" data-en-href="/sheet/en/" href="/sheet/"
                     target="_self">
                     <i class="iconfont icon-note"></i>
-                    <span>乐谱</span>
+                    <span class="navbar-menu-text" data-zh-text="乐谱" data-en-text="Sheet Music">乐谱</span>
                     
                   </a>
                 
@@ -190,11 +200,11 @@
                   
                   
                   
-                  <a class="dropdown-item " 
-                    href="/sheet/transpose/"
+                  <a class="dropdown-item  navbar-menu-link"
+                    data-zh-href="/sheet/transpose/" data-en-href="/sheet/transpose/" href="/sheet/transpose/"
                     target="_self">
                     <i class="iconfont icon-pencil"></i>
-                    <span>移调工具</span>
+                    <span class="navbar-menu-text" data-zh-text="移调工具" data-en-text="Transpose">移调工具</span>
                     
                   </a>
                 
@@ -219,7 +229,7 @@
                   
                   <a class="dropdown-item" href="https://space.bilibili.com/130228752" target="_self">
                     <i class="iconfont icon-bilibili-fill"></i>
-                    <span class="navbar-menu-text" data-zh-text="bilibili" data-en-text="Bilibili">bilibili</span>
+                    <span class="navbar-menu-text" data-zh-text="Bilibili" data-en-text="Bilibili">bilibili</span>
                   </a>
                 
                    -->
@@ -228,11 +238,11 @@
                   
                   
                   
-                  <a class="dropdown-item " 
-                    href="https://space.bilibili.com/130228752"
+                  <a class="dropdown-item  navbar-menu-link"
+                    data-zh-href="https://space.bilibili.com/130228752" data-en-href="https://space.bilibili.com/130228752" href="https://space.bilibili.com/130228752"
                     target="_self">
                     <i class="iconfont icon-bilibili-fill"></i>
-                    <span>bilibili</span>
+                    <span class="navbar-menu-text" data-zh-text="Bilibili" data-en-text="Bilibili">bilibili</span>
                     
                   </a>
                 
@@ -240,11 +250,11 @@
                   
                   
                   
-                  <a class="dropdown-item qr-trigger" 
+                  <a class="dropdown-item qr-trigger "
                     
                     target="_self">
                     <i class="iconfont icon-wechat-fill"></i>
-                    <span>wechat</span>
+                    <span class="navbar-menu-text" data-zh-text="WeChat" data-en-text="WeChat">wechat</span>
                     
                       <img class="qr-img" src="/img/wechat.png" srcset="/img/loading.gif" lazyload alt="qrcode" />
                     
@@ -277,6 +287,9 @@
             function updateNavbarLanguage(language) {
               document.querySelectorAll('.navbar-menu-text').forEach(function (item) {
                 item.textContent = language === 'en' ? item.dataset.enText : item.dataset.zhText;
+              });
+              document.querySelectorAll('.navbar-menu-link').forEach(function (item) {
+                item.href = language === 'en' ? item.dataset.enHref : item.dataset.zhHref;
               });
             }
             document.addEventListener('DOMContentLoaded', function () {
